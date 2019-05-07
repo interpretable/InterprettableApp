@@ -52,7 +52,7 @@ void ofApp::draw(){
     ofEnableAlphaBlending();
     
   //  cam.draw(0.0,0.0);
-    trackingManager.debugDraw(20, 0);
+   /// trackingManager.debugDraw(20, 0);
     
     fbo.begin();
     ofClear(0,0);
