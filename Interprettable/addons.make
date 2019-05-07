@@ -1,0 +1,4 @@
+ofxCv
+ofxFeatureDetector
+ofxOpenCv
+ofxQuadWarp
