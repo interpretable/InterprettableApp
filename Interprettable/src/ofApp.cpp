@@ -7,15 +7,14 @@ void ofApp::setup(){
     
     ofSetFrameRate(60);
     ofSetLogLevel(OF_LOG_NOTICE);
-    
     dataManager.getItems();
-    
     sceneManager.setup();
     
     cam.setDeviceID(1);
     cam.setup(640,480);
     trackingManager.setup();
     
+    // add pictures
     for(int i=0; i<dataManager.mainJson.size(); i++) {
         string url = dataManager.mainJson[i]["card_picture"];
         trackingManager.addImage(url);

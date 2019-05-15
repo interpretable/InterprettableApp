@@ -23,6 +23,8 @@ public:
     void drawScenario();
     void setScenario(ScenarioData * scenario);
     
+    void onScenarioOutHandler();
+    
 private:
     
     ofImage leftImage;

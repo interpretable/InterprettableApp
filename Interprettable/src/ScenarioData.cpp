@@ -14,14 +14,16 @@ void ScenarioData::parse(ofJson & json, int id) {
     // load images
     for(int i=0; i<json["medias"].size(); i++) {
         
-        ofImage image;
-        image.load(json["medias"][i]);
+        RoundedRectImage image;
+        image.setup(json["medias"][i]);
         images.push_back(image);
         
-        ofLogNotice("jso[i]") << json["medias"][i];
+       // ofLogNotice("json[i]") << json["medias"][i];
 
         
     }
+    
+    
     
 }
 

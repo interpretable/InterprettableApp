@@ -1,3 +1,4 @@
+ofxAnimatable
 ofxCv
 ofxFeatureDetector
 ofxOpenCv

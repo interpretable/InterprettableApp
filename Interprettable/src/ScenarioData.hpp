@@ -9,13 +9,14 @@
 #define ScenarioData_hpp
 
 #include "ofMain.h"
+#include "RoundedRectImage.hpp"
 
 class ScenarioData {
     
 public:
     
     void parse(ofJson & json, int id);
-    vector<ofImage> images;
+    vector<RoundedRectImage> images;
     
     int id;
     

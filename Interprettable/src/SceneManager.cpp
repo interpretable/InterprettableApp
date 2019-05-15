@@ -55,7 +55,7 @@ void SceneManager::drawScenario() {
         case 1:
             
             for(int i=0; i<currentScenario->images.size(); i++) {
-                currentScenario->images[i].draw(0.0, 0.0);
+                currentScenario->images[i].draw(0.0, 0.0, rectInnerMargin, 20);
             }
             
             break;
@@ -64,7 +64,7 @@ void SceneManager::drawScenario() {
             
             float y = 0.0;
             for(int i=0; i<currentScenario->images.size(); i++) {
-                currentScenario->images[i].draw(0.0, y);
+                currentScenario->images[i].draw(0.0, y, rectInnerMargin, 20);
                 y +=  currentScenario->images[i].getHeight() + margin;
             }
             
@@ -75,7 +75,7 @@ void SceneManager::drawScenario() {
             
             float y = 0.0;
             for(int i=0; i<currentScenario->images.size(); i++) {
-                currentScenario->images[i].draw(0.0, y);
+                currentScenario->images[i].draw(0.0, y, rectInnerMargin, 20);
                 y +=  currentScenario->images[i].getHeight() + margin;
             }
             
@@ -88,20 +88,12 @@ void SceneManager::drawScenario() {
             x = 0.0;
             for(int i=0; i<currentScenario->images.size(); i++) {
                 
-                float w =   roundNumberToTen(currentScenario->images[i].getWidth());
-                float h =   roundNumberToTen(currentScenario->images[i].getHeight());
-                
-                //ofSetColor(ofRandom(255), ofRandom(255),ofRandom(255), 255);
-                //ofDrawRectRounded(x , y , w , h , 0);
-                
                 ofSetColor(255, 255);
-                ofDrawRectRounded(x + rectInnerMargin, y + rectInnerMargin, w - rectInnerMargin * 2, h - rectInnerMargin * 2, 20);
-                ofSetColor(255, 255);
-                currentScenario->images[i].draw(x, y, w, h);
+                currentScenario->images[i].draw(x, y, rectInnerMargin, 20);
                 if(i < 2) {
-                    y += h + margin;
+                    y += currentScenario->images[i].getHeight() + margin;
                 } else {
-                    x += w + margin;
+                    x += currentScenario->images[i].getWidth() + margin;
                 }
             }
             
@@ -114,11 +106,33 @@ void SceneManager::drawScenario() {
     ofPopMatrix();
 }
 
+void SceneManager::onScenarioOutHandler() {
+    
+    
+    
+    
+}
+
 
 void SceneManager::setScenario(ScenarioData * scenario) {
     
+    if(currentScenario) {
+        
+        int nImages = currentScenario->images.size();
+        for(int i=0; i<nImages; i++) {
+            currentScenario->images[i].hide();
+        }
+        
+    }
+    
     currentScenarioID   = scenario->id;
     currentScenario     = scenario;
+    
+    int nImages = currentScenario->images.size();
+    for(int i=0; i<nImages; i++) {
+        currentScenario->images[i].show();
+    }
+
     
 }
 
