@@ -51,7 +51,7 @@ void SceneManager::drawScenario(ScenarioData * scenario) {
     ofPushMatrix();
     ofTranslate(x, margin);
     
-    int nImages = scenario->images.size();
+    size_t nImages = scenario->images.size();
     
     switch(nImages) {
             
@@ -124,7 +124,7 @@ void SceneManager::setScenario(ScenarioData * scenario) {
     
     if(currentScenario) {
         
-        int nImages = currentScenario->images.size();
+        size_t nImages = currentScenario->images.size();
         for(int i=0; i<nImages; i++) {
             currentScenario->images[i].hide();
         }
@@ -135,7 +135,7 @@ void SceneManager::setScenario(ScenarioData * scenario) {
     currentScenarioID   = scenario->id;
     currentScenario     = scenario;
     
-    int nImages = currentScenario->images.size();
+    size_t nImages = currentScenario->images.size();
     for(int i=0; i<nImages; i++) {
         currentScenario->images[i].show();
     }

@@ -20,7 +20,7 @@ void DataManager::getItems() {
     cout << resp.data << endl;
     mainJson = nlohmann::json::parse(resp.data);
     
-    for(int i=0; i<mainJson.size(); i++) {
+    for(size_t i=0; i<mainJson.size(); i++) {
         
         ScenarioData scenario;
         scenario.parse(mainJson[i], i);
