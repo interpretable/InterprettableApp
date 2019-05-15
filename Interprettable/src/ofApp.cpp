@@ -3,6 +3,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
+    bDebugMode = false;
+    
     ofSetFullscreen(true);
     
     ofSetFrameRate(60);
@@ -100,14 +102,18 @@ void ofApp::draw(){
     ofSetColor(ofColor::red);
     warper.drawSelectedCorner();
     ofSetColor(255,255);
+    
+    if(bDebugMode) {
+        cam.draw(0.0,0.0);
+        ofNoFill();
+        ofSetColor(255,0,0);
+        ofDrawRectangle(cropRectangle);
+        trackingManager.debugDraw(10, 20);
 
-    cam.draw(0.0,0.0);
+    }
     
-    ofNoFill();
-    ofSetColor(255,0,0);
-    ofDrawRectangle(cropRectangle);
+
     
-    trackingManager.debugDraw(10, 20);
 
 }
 
@@ -135,6 +141,9 @@ void ofApp::onMarkerLostHandler(int & markerId) {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    
+    if(key == 'd')
+        bDebugMode = !bDebugMode;
 
     if (key == 'f')
         ofToggleFullscreen();
@@ -154,11 +163,15 @@ void ofApp::mouseMoved(int x, int y ){
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
     
-    cropRectangle.x = storedMousePosition.x;
-    cropRectangle.y = storedMousePosition.y;
+    if(bDebugMode) {
 
-    cropRectangle.width = x - cropRectangle.x;
-    cropRectangle.height = y - cropRectangle.y;
+        cropRectangle.x = storedMousePosition.x;
+        cropRectangle.y = storedMousePosition.y;
+
+        cropRectangle.width = x - cropRectangle.x;
+        cropRectangle.height = y - cropRectangle.y;
+        
+    }
 
 
     

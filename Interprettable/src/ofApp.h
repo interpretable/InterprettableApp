@@ -40,6 +40,8 @@ class ofApp : public ofBaseApp{
         ofFbo fbo;
         ofPoint points[10];
     
+        bool bDebugMode;
+    
         // for rectangle crop
         ofPoint storedMousePosition;
         ofRectangle cropRectangle;
