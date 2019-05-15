@@ -39,6 +39,9 @@ class ofApp : public ofBaseApp{
         ofxQuadWarp warper;
         ofFbo fbo;
         ofPoint points[10];
-        
+    
+        // for rectangle crop
+        ofPoint storedMousePosition;
+        ofRectangle cropRectangle;
 
 };

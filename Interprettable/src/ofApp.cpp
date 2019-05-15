@@ -14,6 +14,8 @@ void ofApp::setup(){
     cam.setup(640,480);
     trackingManager.setup();
     
+    cropRectangle.set(0,0, 640, 480);
+    
     // add pictures
     for(int i=0; i<dataManager.mainJson.size(); i++) {
         string url = dataManager.mainJson[i]["card_picture"];
@@ -49,7 +51,7 @@ void ofApp::update(){
     
     cam.update();
     if(cam.isFrameNew()) {
-        trackingManager.update(cam.getPixels());
+        trackingManager.update(cam.getPixels(), cropRectangle);
     }
     
 }
@@ -58,6 +60,8 @@ void ofApp::update(){
 void ofApp::draw(){
     
     ofBackground(0);
+    ofFill();
+    ofSetColor(255);
     ofEnableAlphaBlending();
     
   //  cam.draw(0.0,0.0);
@@ -93,6 +97,11 @@ void ofApp::draw(){
     ofSetColor(255,255);
 
     cam.draw(0.0,0.0);
+    
+    ofNoFill();
+    ofSetColor(255,0,0);
+    ofDrawRectangle(cropRectangle);
+    
     trackingManager.debugDraw(10, 20);
 
 }
@@ -139,17 +148,27 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
+    
+    cropRectangle.x = storedMousePosition.x;
+    cropRectangle.y = storedMousePosition.y;
 
+    cropRectangle.width = x - cropRectangle.x;
+    cropRectangle.height = y - cropRectangle.y;
+
+
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+    
+    storedMousePosition.set(x, y);
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
 
+    cropRectangle.set(0,0,0,0);
 }
 
 //--------------------------------------------------------------

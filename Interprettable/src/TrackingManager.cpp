@@ -49,9 +49,9 @@ void TrackingManager::start() {
 
 
 
-void TrackingManager::update(ofPixels & input) {
+void TrackingManager::update(ofPixels & input, ofRectangle roi) {
     
-    detector.update(input);
+    detector.update(input, roi);
     
     for(int i=0; i<images.size(); i++) {
         

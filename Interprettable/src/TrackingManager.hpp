@@ -18,7 +18,7 @@ public:
     void setup();
     void addImage(string url);
     void start();
-    void update(ofPixels & input);
+    void update(ofPixels & input, ofRectangle roi);
     
     string getLabel(int index);
     
