@@ -16,7 +16,7 @@ void DataManager::setup() {
 void DataManager::getItems() {
     
     // load main json
-    ofHttpResponse resp = ofLoadURL("http://interpretable.erasme.org/interpretabble-api/public/api/items");
+    ofHttpResponse resp = ofLoadURL("http://interpretable.erasme.org/api/public/api/items");
     cout << resp.data << endl;
     mainJson = nlohmann::json::parse(resp.data);
     
