@@ -10,7 +10,7 @@ void ofApp::setup(){
     dataManager.getItems();
     sceneManager.setup();
     
-    cam.setDeviceID(2);
+    cam.setDeviceID(0);
     cam.setup(640,480);
     trackingManager.setup();
     
@@ -51,7 +51,9 @@ void ofApp::update(){
     
     cam.update();
     if(cam.isFrameNew()) {
-        trackingManager.update(cam.getPixels(), cropRectangle);
+        ofPixels & pixels = cam.getPixels();
+        pixels.crop(cropRectangle.x, cropRectangle.y, cropRectangle.width, cropRectangle.height);
+        trackingManager.update(cam.getPixels());
     }
     
 }
@@ -168,7 +170,7 @@ void ofApp::mousePressed(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
 
-    cropRectangle.set(0,0,0,0);
+   // cropRectangle.set(0,0,0,0);
 }
 
 //--------------------------------------------------------------
