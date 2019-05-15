@@ -3,6 +3,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
+    ofSetFullscreen(true);
+    
     ofSetFrameRate(60);
     ofSetLogLevel(OF_LOG_NOTICE);
     
@@ -10,10 +12,18 @@ void ofApp::setup(){
     
     sceneManager.setup();
     
+    cam.setDeviceID(1);
     cam.setup(640,480);
     trackingManager.setup();
+    
+    for(int i=0; i<dataManager.mainJson.size(); i++) {
+        string url = dataManager.mainJson[i]["card_picture"];
+        trackingManager.addImage(url);
+    }
+    
     ofAddListener(trackingManager.onMarkerFound, this, &ofApp::onMarkerFoundHandler);
     ofAddListener(trackingManager.onMarkerLost, this, &ofApp::onMarkerLostHandler);
+    trackingManager.start();
     
     sceneManager.setScenario(&dataManager.scenarios[0]);
     
@@ -24,7 +34,7 @@ void ofApp::setup(){
     int w = fbo.getWidth();
     int h = fbo.getHeight();
     
-    
+    // quad warping 
     warper.setSourceRect(ofRectangle(0, 0, w, h));
     warper.setTopLeftCornerPosition(ofPoint(x, y));
     warper.setTopRightCornerPosition(ofPoint(x + w, y));
@@ -53,7 +63,7 @@ void ofApp::draw(){
     
   //  cam.draw(0.0,0.0);
    /// trackingManager.debugDraw(20, 0);
-    
+
     fbo.begin();
     ofClear(0,0);
     ofEnableAlphaBlending();
@@ -81,14 +91,27 @@ void ofApp::draw(){
     
     ofSetColor(ofColor::red);
     warper.drawSelectedCorner();
+    ofSetColor(255,255);
 
+    cam.draw(0.0,0.0);
+    trackingManager.debugDraw(10, 20);
 
 }
+
+void ofApp::exit() {
+    
+    warper.save();
+    
+}
+
 
 //--------------------------------------------------------------
 
 void ofApp::onMarkerFoundHandler(int & markerId) {
     
+    ofLogNotice("Marker found !" ) << markerId;
+    sceneManager.setScenario(&dataManager.scenarios[markerId]);
+
 }
 
 //--------------------------------------------------------------
@@ -100,6 +123,9 @@ void ofApp::onMarkerLostHandler(int & markerId) {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
+    if (key == 'f')
+        ofToggleFullscreen();
+    
 }
 
 //--------------------------------------------------------------

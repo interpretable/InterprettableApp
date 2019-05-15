@@ -27,6 +27,8 @@ class ofApp : public ofBaseApp{
     
         void onMarkerFoundHandler(int & markerId);
         void onMarkerLostHandler(int & markerId);
+    
+    void exit();
     		
         ofVideoGrabber cam;
     

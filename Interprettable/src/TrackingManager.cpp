@@ -11,6 +11,7 @@ void TrackingManager::setup() {
     
     detector.setup();
     
+    /*
     string path = "markers";
     ofDirectory dir(path);
     dir.allowExt("jpg");
@@ -26,11 +27,27 @@ void TrackingManager::setup() {
         detecteds.push_back(false);
     }
     
+     */
+
+}
+
+void TrackingManager::addImage(string url) {
     
-    detector.start();
-    
+    ofImage img;
+    img.load(url);
+    detector.addImageToTrack(img, url);
+    images.push_back(img);
+    detecteds.push_back(false);
     
 }
+
+void TrackingManager::start() {
+    detector.start();
+
+    
+}
+
+
 
 void TrackingManager::update(ofPixels & input) {
     
