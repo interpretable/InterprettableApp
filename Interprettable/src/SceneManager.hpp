@@ -20,7 +20,7 @@ public:
     void draw();
     
     void drawBack();
-    void drawScenario();
+    void drawScenario(ScenarioData * scenario);
     void setScenario(ScenarioData * scenario);
     
     void onScenarioOutHandler();
@@ -31,7 +31,8 @@ private:
     
     int currentScenarioID;
     ScenarioData * currentScenario;
-    
+    ScenarioData * outScenario;
+
     int margin;
     int rectInnerMargin;
     

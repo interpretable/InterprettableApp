@@ -10,6 +10,7 @@
 void SceneManager::setup() {
     
     currentScenario = NULL;
+    outScenario     = NULL;
     leftImage.load("gabarit.png");
     
     margin = 0;
@@ -22,8 +23,14 @@ void SceneManager::update() {
 
 void SceneManager::draw() {
     
+    drawBack();
+
+    if(outScenario) {
+        drawScenario(outScenario);
+    }
+    
     if(currentScenario) {
-        drawScenario();
+        drawScenario(currentScenario);
     }
     
 }
@@ -36,16 +43,15 @@ void SceneManager::drawBack() {
 }
 
 
-void SceneManager::drawScenario() {
+void SceneManager::drawScenario(ScenarioData * scenario) {
     
-    drawBack();
     
     float x = margin + leftImage.getWidth();
     
     ofPushMatrix();
     ofTranslate(x, margin);
     
-    int nImages = currentScenario->images.size();
+    int nImages = scenario->images.size();
     
     switch(nImages) {
             
@@ -54,8 +60,8 @@ void SceneManager::drawScenario() {
             
         case 1:
             
-            for(int i=0; i<currentScenario->images.size(); i++) {
-                currentScenario->images[i].draw(0.0, 0.0, rectInnerMargin, 20);
+            for(int i=0; i<scenario->images.size(); i++) {
+                scenario->images[i].draw(0.0, 0.0, rectInnerMargin, 20);
             }
             
             break;
@@ -63,8 +69,8 @@ void SceneManager::drawScenario() {
         case 2: {
             
             float y = 0.0;
-            for(int i=0; i<currentScenario->images.size(); i++) {
-                currentScenario->images[i].draw(0.0, y, rectInnerMargin, 20);
+            for(int i=0; i<scenario->images.size(); i++) {
+                scenario->images[i].draw(0.0, y, rectInnerMargin, 20);
                 y +=  currentScenario->images[i].getHeight() + margin;
             }
             
@@ -74,9 +80,9 @@ void SceneManager::drawScenario() {
         case 3: {
             
             float y = 0.0;
-            for(int i=0; i<currentScenario->images.size(); i++) {
-                currentScenario->images[i].draw(0.0, y, rectInnerMargin, 20);
-                y +=  currentScenario->images[i].getHeight() + margin;
+            for(int i=0; i<scenario->images.size(); i++) {
+                scenario->images[i].draw(0.0, y, rectInnerMargin, 20);
+                y +=  scenario->images[i].getHeight() + margin;
             }
             
             break;
@@ -86,14 +92,14 @@ void SceneManager::drawScenario() {
             
             float y = 0.0;
             x = 0.0;
-            for(int i=0; i<currentScenario->images.size(); i++) {
+            for(int i=0; i<scenario->images.size(); i++) {
                 
                 ofSetColor(255, 255);
-                currentScenario->images[i].draw(x, y, rectInnerMargin, 20);
+                scenario->images[i].draw(x, y, rectInnerMargin, 20);
                 if(i < 2) {
-                    y += currentScenario->images[i].getHeight() + margin;
+                    y += scenario->images[i].getHeight() + margin;
                 } else {
-                    x += currentScenario->images[i].getWidth() + margin;
+                    x += scenario->images[i].getWidth() + margin;
                 }
             }
             
@@ -122,7 +128,8 @@ void SceneManager::setScenario(ScenarioData * scenario) {
         for(int i=0; i<nImages; i++) {
             currentScenario->images[i].hide();
         }
-        
+        outScenario     = scenario;
+
     }
     
     currentScenarioID   = scenario->id;
