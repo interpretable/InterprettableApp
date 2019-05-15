@@ -35,17 +35,19 @@ void RoundedRectImage::draw(float x, float y, float rectInnerMargin, float radiu
     ofDrawRectRounded(x + rectInnerMargin, y + rectInnerMargin, w - rectInnerMargin * 2, h - rectInnerMargin * 2, radius);
     ofImage::draw(x, y, w, h);
     
+    ofLogNotice("drawing ") << this->url << " with " << opacityPct.getCurrentValue();
+    
 }
 
-void RoundedRectImage::show() {
+void RoundedRectImage::show(float duration) {
     
     opacityPct.setCurve(EASE_IN);
-    opacityPct.setDuration(0.55);
+    opacityPct.setDuration(duration);
     opacityPct.animateTo(1.0);
 }
 
-void RoundedRectImage::hide() {
+void RoundedRectImage::hide(float duration) {
     opacityPct.setCurve(EASE_OUT);
-    opacityPct.setDuration(0.55);
+    opacityPct.setDuration(duration);
     opacityPct.animateTo(0.0);
 }

@@ -124,11 +124,12 @@ void SceneManager::setScenario(ScenarioData * scenario) {
     
     if(currentScenario) {
         
-        int nImages = currentScenario->images.size();
+        outScenario     = currentScenario;
+
+        int nImages = outScenario->images.size();
         for(int i=0; i<nImages; i++) {
-            currentScenario->images[i].hide();
+            outScenario->images[i].hide(1.0);
         }
-        outScenario     = scenario;
 
     }
     
@@ -137,7 +138,7 @@ void SceneManager::setScenario(ScenarioData * scenario) {
     
     int nImages = currentScenario->images.size();
     for(int i=0; i<nImages; i++) {
-        currentScenario->images[i].show();
+        currentScenario->images[i].show(1.0);
     }
 
     

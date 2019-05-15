@@ -10,7 +10,7 @@ void ofApp::setup(){
     dataManager.getItems();
     sceneManager.setup();
     
-    cam.setDeviceID(0);
+    cam.setDeviceID(2);
     cam.setup(640,480);
     trackingManager.setup();
     

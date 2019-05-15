@@ -19,8 +19,8 @@ public:
     void update();
     void draw(float x, float y, float rectInnerMargin, float radius = 20);
     
-    void show();
-    void hide();
+    void show(float duration = 1.0);
+    void hide(float duration = 1.0);
     
 private:
     
