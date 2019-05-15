@@ -52,7 +52,10 @@ void ofApp::update(){
     cam.update();
     if(cam.isFrameNew()) {
         ofPixels & pixels = cam.getPixels();
-        pixels.crop(cropRectangle.x, cropRectangle.y, cropRectangle.width, cropRectangle.height);
+        
+        if(cropRectangle.width > 0 && cropRectangle.height > 0)
+            pixels.crop(cropRectangle.x, cropRectangle.y, cropRectangle.width, cropRectangle.height);
+        
         trackingManager.update(cam.getPixels());
     }
     
