@@ -53,7 +53,7 @@ void TrackingManager::update(ofPixels & input) {
     
     detector.update(input);
     
-    for(size_t i=0; i<images.size(); i++) {
+    for(int i=0; i<images.size(); i++) {
         
         bool bIsDetected = detector.getDetected(i);
        
@@ -83,7 +83,7 @@ void TrackingManager::debugDraw(float x, float y) {
     ofPushMatrix();
     ofTranslate(x, y);
     
-    for(size_t i=0; i<images.size(); i++) {
+    for(int i=0; i<images.size(); i++) {
         
         bool bIsDetected = detector.getDetected(i);
         if(bIsDetected) {
