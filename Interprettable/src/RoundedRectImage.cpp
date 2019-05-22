@@ -35,7 +35,6 @@ void RoundedRectImage::draw(float x, float y, float rectInnerMargin, float radiu
     ofDrawRectRounded(x + rectInnerMargin, y + rectInnerMargin, w - rectInnerMargin * 2, h - rectInnerMargin * 2, radius);
     ofImage::draw(x, y, w, h);
     
-    ofLogNotice("drawing ") << this->url << " with " << opacityPct.getCurrentValue();
     
 }
 

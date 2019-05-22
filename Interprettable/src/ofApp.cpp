@@ -3,7 +3,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    bDebugMode = false;
+    bDebugMode      = false;
+    bDebugWarpMode  = false;
     
     ofSetFullscreen(true);
     
@@ -16,8 +17,9 @@ void ofApp::setup(){
     cam.setup(640,480);
     trackingManager.setup();
     
-    cropRectangle.set(0,0, 640, 480);
-    
+    configJson = ofLoadJson("config.json");
+    cropRectangle.set( configJson["camera_crop"]["x"], configJson["camera_crop"]["y"], configJson["camera_crop"]["width"], configJson["camera_crop"]["height"]);
+
     // add pictures
     for(int i=0; i<dataManager.mainJson.size(); i++) {
         string url = dataManager.mainJson[i]["card_picture"];
@@ -45,7 +47,11 @@ void ofApp::setup(){
     warper.setBottomRightCornerPosition(ofPoint(x + w, y + h));
     warper.setup();
     warper.load();
-
+    
+    currentTimeMillis  = ofGetElapsedTimeMillis();
+    logger.setup();
+    logger.log("start");
+    
 }
 
 //--------------------------------------------------------------
@@ -59,6 +65,16 @@ void ofApp::update(){
             pixels.crop(cropRectangle.x, cropRectangle.y, cropRectangle.width, cropRectangle.height);
         
         trackingManager.update(pixels);
+    }
+    
+    // check for inactivity
+    int curTime = ofGetElapsedTimeMillis();
+    int diff = curTime - currentTimeMillis;
+    
+    // if nothings happends for 10mn, restart.
+    if( diff > 600000) {
+        int start = 0;
+        onMarkerFoundHandler(start);
     }
     
 }
@@ -90,18 +106,22 @@ void ofApp::draw(){
     fbo.draw(0, 0);
     ofPopMatrix();
     
-    ofSetColor(ofColor::magenta);
-    warper.drawQuadOutline();
-    
-    ofSetColor(ofColor::yellow);
-    warper.drawCorners();
-    
-    ofSetColor(ofColor::magenta);
-    warper.drawHighlightedCorner();
-    
-    ofSetColor(ofColor::red);
-    warper.drawSelectedCorner();
-    ofSetColor(255,255);
+    if(bDebugWarpMode) {
+        
+        ofSetColor(ofColor::magenta);
+        warper.drawQuadOutline();
+        
+        ofSetColor(ofColor::yellow);
+        warper.drawCorners();
+        
+        ofSetColor(ofColor::magenta);
+        warper.drawHighlightedCorner();
+        
+        ofSetColor(ofColor::red);
+        warper.drawSelectedCorner();
+        ofSetColor(255,255);
+        
+    }
     
     if(bDebugMode) {
         cam.draw(0.0,0.0);
@@ -111,16 +131,15 @@ void ofApp::draw(){
         trackingManager.debugDraw(10, 20);
 
     }
-    
-
-    
 
 }
 
 void ofApp::exit() {
     
     warper.save();
+    logger.log("end");
     
+
 }
 
 
@@ -130,6 +149,10 @@ void ofApp::onMarkerFoundHandler(int & markerId) {
     
     ofLogNotice("Marker found !" ) << markerId;
     sceneManager.setScenario(&dataManager.scenarios[markerId]);
+    logger.logScenario(ofToString(markerId));
+    
+    // restart time
+    currentTimeMillis  = ofGetElapsedTimeMillis();
 
 }
 
@@ -144,6 +167,10 @@ void ofApp::keyPressed(int key){
     
     if(key == 'd')
         bDebugMode = !bDebugMode;
+    
+    if(key == 'w')
+        bDebugWarpMode =!bDebugWarpMode;
+    
 
     if (key == 'f')
         ofToggleFullscreen();
@@ -171,9 +198,12 @@ void ofApp::mouseDragged(int x, int y, int button){
         cropRectangle.width = x - cropRectangle.x;
         cropRectangle.height = y - cropRectangle.y;
         
+        configJson["camera_crop"]["x"] = cropRectangle.x;
+        configJson["camera_crop"]["y"] = cropRectangle.y;
+        configJson["camera_crop"]["width"] = cropRectangle.width;
+        configJson["camera_crop"]["height"] = cropRectangle.height;
+        ofSaveJson("config.json", configJson);
     }
-
-
     
 }
 

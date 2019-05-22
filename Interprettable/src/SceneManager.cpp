@@ -9,21 +9,31 @@
 
 void SceneManager::setup() {
     
-    currentScenario = NULL;
-    outScenario     = NULL;
+    currentScenarioID   = - 1;
+    currentScenario     = NULL;
+    outScenario         = NULL;
     leftImage.load("gabarit.png");
     
     margin = 0;
     rectInnerMargin  = 5;
+    
+    
 }
 
 void SceneManager::update() {
+    
+    
+    
     
 }
 
 void SceneManager::draw() {
     
-    drawBack();
+    if(currentScenarioID > 0) {
+        
+        drawBack();
+        
+    }
 
     if(outScenario) {
         drawScenario(outScenario);
@@ -46,7 +56,10 @@ void SceneManager::drawBack() {
 void SceneManager::drawScenario(ScenarioData * scenario) {
     
     
-    float x = margin + leftImage.getWidth();
+    float x = margin;
+    if(currentScenarioID > 0) {
+        x += leftImage.getWidth();
+    }
     
     ofPushMatrix();
     ofTranslate(x, margin);

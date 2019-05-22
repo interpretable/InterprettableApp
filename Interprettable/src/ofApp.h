@@ -5,6 +5,7 @@
 #include "DataManager.hpp"
 #include "SceneManager.hpp"
 #include "ofxQuadWarp.h"
+#include "Logger.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -24,11 +25,11 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+        void exit();
     
         void onMarkerFoundHandler(int & markerId);
         void onMarkerLostHandler(int & markerId);
     
-    void exit();
     		
         ofVideoGrabber cam;
     
@@ -40,10 +41,15 @@ class ofApp : public ofBaseApp{
         ofFbo fbo;
         ofPoint points[10];
     
-        bool bDebugMode;
+        bool bDebugMode, bDebugWarpMode;
     
         // for rectangle crop
         ofPoint storedMousePosition;
         ofRectangle cropRectangle;
-
+    
+        int currentTimeMillis;
+        Logger logger;
+    
+        // main config
+        ofJson configJson;
 };

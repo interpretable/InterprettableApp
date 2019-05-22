@@ -36,6 +36,9 @@ private:
     int margin;
     int rectInnerMargin;
     
+    // time handling
+    int currentTimeMillis;
+    
     int roundNumberToTen(int num)
     {
         int rem = num % 10;

@@ -25,6 +25,7 @@
 		74D31933EE82E12834DB3B06 /* ofxAnimatableOfColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 777D89F9EECAC3FE2405D5D1 /* ofxAnimatableOfColor.cpp */; };
 		7CDAD32BE4FA46701E3552C7 /* RunningBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF6AED6A17AC0C17F63CC4 /* RunningBackground.cpp */; };
 		83841387228C486F006D23E7 /* RoundedRectImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83841385228C486F006D23E7 /* RoundedRectImage.cpp */; };
+		83CF744522957E3F00E9998A /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83CF744322957E3F00E9998A /* Logger.cpp */; };
 		A6668C5B1272D7FCD5B5A16F /* Utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CEC50DB3D06414010233963 /* Utilities.cpp */; };
 		AC29B7A7FEDB0A378D08F41D /* SceneManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22EDA5A62C642C37311C4384 /* SceneManager.cpp */; };
 		B0E7FECFE9B973082F2EC0F8 /* TrackingManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A52A90920A024262323E7B1 /* TrackingManager.cpp */; };
@@ -259,6 +260,8 @@
 		83841386228C486F006D23E7 /* RoundedRectImage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RoundedRectImage.hpp; sourceTree = "<group>"; };
 		83929E5F90BCDD1254F12E70 /* DataManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = DataManager.cpp; path = src/DataManager.cpp; sourceTree = SOURCE_ROOT; };
 		83B666BBAFDB754B6DDC3782 /* dictionary.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = dictionary.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/aruco/dictionary.hpp; sourceTree = SOURCE_ROOT; };
+		83CF744322957E3F00E9998A /* Logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
+		83CF744422957E3F00E9998A /* Logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
 		84194BA49BB43B39B3C70547 /* estimated_covariance.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = estimated_covariance.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/ximgproc/estimated_covariance.hpp; sourceTree = SOURCE_ROOT; };
 		848371264443687510D5047E /* cv_cpu_dispatch.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = cv_cpu_dispatch.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/cv_cpu_dispatch.h; sourceTree = SOURCE_ROOT; };
 		84C059AA681D7088B742D8E8 /* cuda.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = cuda.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/cuda.hpp; sourceTree = SOURCE_ROOT; };
@@ -1882,6 +1885,8 @@
 				22EDA5A62C642C37311C4384 /* SceneManager.cpp */,
 				83841385228C486F006D23E7 /* RoundedRectImage.cpp */,
 				83841386228C486F006D23E7 /* RoundedRectImage.hpp */,
+				83CF744322957E3F00E9998A /* Logger.cpp */,
+				83CF744422957E3F00E9998A /* Logger.hpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -2088,6 +2093,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				83CF744522957E3F00E9998A /* Logger.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				BB0EB03D7106254409905306 /* DataManager.cpp in Sources */,
 				B0E7FECFE9B973082F2EC0F8 /* TrackingManager.cpp in Sources */,
