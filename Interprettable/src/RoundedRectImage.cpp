@@ -46,7 +46,9 @@ void RoundedRectImage::show(float duration) {
 }
 
 void RoundedRectImage::hide(float duration) {
+    
     opacityPct.setCurve(EASE_OUT);
     opacityPct.setDuration(duration);
     opacityPct.animateTo(0.0);
+    
 }

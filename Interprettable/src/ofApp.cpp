@@ -47,6 +47,8 @@ void ofApp::setup(){
     warper.setBottomRightCornerPosition(ofPoint(x + w, y + h));
     warper.setup();
     warper.load();
+    warper.disableMouseControls();
+    warper.disableKeyboardShortcuts();
     
     currentTimeMillis  = ofGetElapsedTimeMillis();
     logger.setup();
@@ -87,24 +89,26 @@ void ofApp::draw(){
     ofSetColor(255);
     ofEnableAlphaBlending();
     
-  //  cam.draw(0.0,0.0);
-   /// trackingManager.debugDraw(20, 0);
-
     fbo.begin();
-    ofClear(0,0);
     ofEnableAlphaBlending();
+    ofClear(0, 0, 0, 0);
     ofSetColor(255,255);
     sceneManager.draw();
+    ofDisableAlphaBlending();
     fbo.end();
     
     ofMatrix4x4 mat = warper.getMatrix();
     
     //======================== use the matrix to transform our fbo.
     ofSetColor(255,255);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     ofPushMatrix();
     ofMultMatrix(mat);
     fbo.draw(0, 0);
     ofPopMatrix();
+    glDisable(GL_BLEND);
+
     
     if(bDebugWarpMode) {
         
@@ -138,7 +142,6 @@ void ofApp::exit() {
     
     warper.save();
     logger.log("end");
-    
 
 }
 
@@ -148,6 +151,7 @@ void ofApp::exit() {
 void ofApp::onMarkerFoundHandler(int & markerId) {
     
     ofLogNotice("Marker found !" ) << markerId;
+    
     sceneManager.setScenario(&dataManager.scenarios[markerId]);
     logger.logScenario(ofToString(markerId));
     
@@ -168,8 +172,20 @@ void ofApp::keyPressed(int key){
     if(key == 'd')
         bDebugMode = !bDebugMode;
     
-    if(key == 'w')
+    if(key == 'w') {
+        
         bDebugWarpMode =!bDebugWarpMode;
+        
+        if(bDebugWarpMode) {
+            warper.enableMouseControls();
+            warper.enableKeyboardShortcuts();
+        } else {
+            warper.disableMouseControls();
+            warper.disableKeyboardShortcuts();
+
+        }
+        
+    }
     
 
     if (key == 'f')
@@ -216,7 +232,6 @@ void ofApp::mousePressed(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
 
-   // cropRectangle.set(0,0,0,0);
 }
 
 //--------------------------------------------------------------
