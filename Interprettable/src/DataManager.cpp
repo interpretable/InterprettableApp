@@ -13,10 +13,10 @@ void DataManager::setup() {
     
 }
 
-void DataManager::getItems() {
+void DataManager::getItems(string url) {
     
     // load main json
-    ofHttpResponse resp = ofLoadURL("http://interpretable.erasme.org/api/public/api/items");
+    ofHttpResponse resp = ofLoadURL(url);
     cout << resp.data << endl;
     mainJson = nlohmann::json::parse(resp.data);
     

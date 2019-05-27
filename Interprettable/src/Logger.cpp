@@ -10,7 +10,7 @@
 void Logger::setup() {
     
     string time = getTime();
-    jsonName = "log_" + time + ".json";
+    jsonName = "logs/log_" + time + ".json";
     
     auto jsonObjects = nlohmann::json::array();
     logJson["scenarios"] = jsonObjects;

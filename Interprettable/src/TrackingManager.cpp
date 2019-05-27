@@ -78,6 +78,14 @@ string TrackingManager::getLabel(int index) {
     
 }
 
+void TrackingManager::setProps(float distanceRatio, int nTries) {
+    
+    detector.distanceRatio = distanceRatio;
+    detector.nTries = nTries;
+    
+}
+
+
 void TrackingManager::debugDraw(float x, float y) {
     
     ofPushMatrix();

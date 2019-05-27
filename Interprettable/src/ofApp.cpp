@@ -10,16 +10,18 @@ void ofApp::setup(){
     
     ofSetFrameRate(60);
     ofSetLogLevel(OF_LOG_NOTICE);
-    dataManager.getItems();
+    
+    configJsonFile.open("config.json");
+    loadConfigJson();
+    
+    dataManager.getItems(configJson["backoffice-getall-url"]);
     sceneManager.setup();
     
-    cam.setDeviceID(0);
-    cam.setup(640,480);
+    cam.listDevices();
+    cam.setDeviceID(3);
+    cam.setup(configJson["webcam-width"],configJson["webcam-height"]);
     trackingManager.setup();
     
-    configJson = ofLoadJson("config.json");
-    cropRectangle.set( configJson["camera_crop"]["x"], configJson["camera_crop"]["y"], configJson["camera_crop"]["width"], configJson["camera_crop"]["height"]);
-
     // add pictures
     for(int i=0; i<dataManager.mainJson.size(); i++) {
         string url = dataManager.mainJson[i]["card_picture"];
@@ -59,6 +61,13 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
+    // check for config changes
+    int currentTimeStamp = std::filesystem::last_write_time(configJsonFile);
+    
+    if(currentTimeStamp != configJsonTimeStamp) {
+        loadConfigJson();
+    }
+    
     cam.update();
     if(cam.isFrameNew()) {
         ofPixels pixels = cam.getPixels();
@@ -67,6 +76,7 @@ void ofApp::update(){
             pixels.crop(cropRectangle.x, cropRectangle.y, cropRectangle.width, cropRectangle.height);
         
         trackingManager.update(pixels);
+        
     }
     
     // check for inactivity
@@ -143,6 +153,20 @@ void ofApp::exit() {
     warper.save();
     logger.log("end");
 
+}
+
+//--------------------------------------------------------------
+
+
+void ofApp::loadConfigJson() {
+    
+    
+    configJsonTimeStamp = std::filesystem::last_write_time(configJsonFile);
+    configJson = ofLoadJson("config.json");
+    cropRectangle.set( configJson["camera_crop"]["x"], configJson["camera_crop"]["y"], configJson["camera_crop"]["width"], configJson["camera_crop"]["height"]);
+    trackingManager.setProps(configJson["features-tracking-ratio"], configJson["features-ntries"]);
+    
+    
 }
 
 

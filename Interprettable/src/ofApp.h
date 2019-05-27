@@ -30,6 +30,7 @@ class ofApp : public ofBaseApp{
         void onMarkerFoundHandler(int & markerId);
         void onMarkerLostHandler(int & markerId);
     
+        void loadConfigJson();
     		
         ofVideoGrabber cam;
     
@@ -52,4 +53,7 @@ class ofApp : public ofBaseApp{
     
         // main config
         ofJson configJson;
+        ofFile configJsonFile;
+        int configJsonTimeStamp;
+    
 };

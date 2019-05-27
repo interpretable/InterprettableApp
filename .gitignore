@@ -1,0 +1,10 @@
+#########################
+# core apps
+#########################
+
+Interprettable/bin/data/logs/*
+Interprettable/bin/Interprettable.app/*
+
+# don't ignore the .gitignore file
+!.gitignore
+

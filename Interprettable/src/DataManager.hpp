@@ -15,7 +15,7 @@ class DataManager {
 public:
     
     void setup();
-    void getItems();
+    void getItems(string url);
     
     void log(){};
     

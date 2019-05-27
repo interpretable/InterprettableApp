@@ -26,6 +26,8 @@ public:
     
     ofEvent<int> onMarkerFound;
     ofEvent<int> onMarkerLost;
+    
+    void setProps(float distanceRatio, int nTries);
 
     
 private:
