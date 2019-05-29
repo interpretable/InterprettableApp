@@ -28,11 +28,11 @@ public:
     ofEvent<int> onMarkerLost;
     
     void setProps(float distanceRatio, int nTries);
+    ofxFeatureDetector  detector;
 
     
 private:
     
-    ofxFeatureDetector  detector;
     vector<ofImage>     images;
     vector<bool>        detecteds;
     

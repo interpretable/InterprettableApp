@@ -12,6 +12,14 @@ Project{
         name: { return FileInfo.baseName(sourceDirectory) }
 
         files: [
+            "src/RoundedRectImage.cpp",
+            "src/RoundedRectImage.hpp",
+            "src/ScenarioData.cpp",
+            "src/ScenarioData.hpp",
+            "src/SceneManager.cpp",
+            "src/SceneManager.hpp",
+            "src/TrackingManager.cpp",
+            "src/TrackingManager.hpp",
             'src/main.cpp',
             'src/ofApp.cpp',
             'src/ofApp.h',

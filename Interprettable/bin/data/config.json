@@ -1,1 +1,1 @@
-{"webcam-width":1280,"webcam-height":1080,"webcam-device-id":1,"backoffice-getall-url":"http://interpretable.erasme.org/api/public/api/items","features-ntries":3,"features-tracking-ratio":0.55,"camera_crop":{"height":161.0,"width":219.0,"x":217.0,"y":93.0}}
+{"backoffice-getall-url":"http://localhost/api/public/api/items","camera_crop":{"height":281.0,"width":381.0,"x":417.0,"y":151.0},"features-ntries":12,"features-tracking-ratio":0.7,"webcam-device-id":0,"webcam-height":960,"webcam-width":1280}
