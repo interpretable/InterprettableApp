@@ -4,7 +4,8 @@
 
 Interprettable/bin/data/logs/*
 Interprettable/bin/Interprettable.app/*
-
+Interprettable/bin/data/logs/*
 # don't ignore the .gitignore file
 !.gitignore
-
+build-Interprettable-Desktop-Debug/*
+Interprettable/obj/*

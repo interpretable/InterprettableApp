@@ -64,6 +64,8 @@ void ofApp::setup(){
     currentTimeMillis  = ofGetElapsedTimeMillis();
     logger.setup();
     logger.log("start");
+
+    ofSetFullscreen(true);
     
 }
 
@@ -191,7 +193,8 @@ void ofApp::onMarkerFoundHandler(int & markerId) {
     
     ofLogNotice("Marker found !" ) << markerId;
     ofLogNotice("Marker min is !" ) << trackingManager.detector.getLowestScoreIndex();
-
+    
+    if( markerId == trackingManager.detector.getLowestScoreIndex()) 
     sceneManager.setScenario(&dataManager.scenarios[markerId]);
     logger.logScenario(ofToString(markerId));
     
@@ -222,7 +225,7 @@ void ofApp::keyPressed(int key){
         } else {
             warper.disableMouseControls();
             warper.disableKeyboardShortcuts();
-
+            warper.save();
         }
         
     }
