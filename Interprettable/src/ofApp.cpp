@@ -17,9 +17,18 @@ void ofApp::setup(){
     dataManager.getItems(configJson["backoffice-getall-url"]);
     sceneManager.setup();
     
+/*
     cam.listDevices();
-    cam.setDeviceID(3);
+    cam.setDeviceID(0);
     cam.setup(configJson["webcam-width"],configJson["webcam-height"]);
+*/
+
+	cam.allocate(1280,720, OF_PIXELS_RGB);
+    cam.setPipeline("v4l2src device=/dev/video0 ! queue ! video/x-h264,width=1280,height=720,framerate=30/1 ! h264parse ! avdec_h264 ! videoconvert", OF_PIXELS_RGB, false, 1280, 720);
+   // cam.setup(configJson["webcam-width"],configJson["webcam-height"]);
+    cam.startPipeline();
+	cam.play();
+
     trackingManager.setup();
     
     // add pictures
@@ -55,6 +64,8 @@ void ofApp::setup(){
     currentTimeMillis  = ofGetElapsedTimeMillis();
     logger.setup();
     logger.log("start");
+
+    ofSetFullscreen(true);
     
 }
 
@@ -100,6 +111,8 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+
+
     
     ofBackground(0);
     ofFill();
@@ -145,7 +158,11 @@ void ofApp::draw(){
     }
     
     if(bDebugMode) {
-        cam.draw(0.0,0.0);
+
+	
+	ofImage image;
+	image.setFromPixels(cam.getPixels());
+        image.draw(0.0,0.0);
         ofNoFill();
         ofSetColor(255,0,0);
         ofDrawRectangle(cropRectangle);
@@ -182,7 +199,9 @@ void ofApp::loadConfigJson() {
 void ofApp::onMarkerFoundHandler(int & markerId) {
     
     ofLogNotice("Marker found !" ) << markerId;
+    ofLogNotice("Marker min is !" ) << trackingManager.detector.getLowestScoreIndex();
     
+    if( markerId == trackingManager.detector.getLowestScoreIndex()) 
     sceneManager.setScenario(&dataManager.scenarios[markerId]);
     logger.logScenario(ofToString(markerId));
     
@@ -213,7 +232,7 @@ void ofApp::keyPressed(int key){
         } else {
             warper.disableMouseControls();
             warper.disableKeyboardShortcuts();
-
+            warper.save();
         }
         
     }

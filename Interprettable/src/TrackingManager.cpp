@@ -88,13 +88,15 @@ void TrackingManager::setProps(float distanceRatio, int nTries) {
 
 void TrackingManager::debugDraw(float x, float y) {
     
+    int lowest = detector.getLowestScoreIndex();
+
     ofPushMatrix();
     ofTranslate(x, y);
     
     for(int i=0; i<images.size(); i++) {
         
         bool bIsDetected = detector.getDetected(i);
-        if(bIsDetected) {
+        if(bIsDetected && i == lowest) {
             ofDrawBitmapStringHighlight(detector.labels[i], 0, i * 20);
         }
 

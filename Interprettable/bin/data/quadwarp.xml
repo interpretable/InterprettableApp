@@ -8,8 +8,8 @@
 	</src>
 	<dst>
 		<point x="443" y="212" />
-		<point x="1343" y="366" />
-		<point x="1356" y="720" />
-		<point x="961" y="714" />
+		<point x="906" y="192" />
+		<point x="907" y="641" />
+		<point x="443" y="565" />
 	</dst>
 </quadwarp>

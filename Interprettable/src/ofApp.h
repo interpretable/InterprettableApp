@@ -32,7 +32,7 @@ class ofApp : public ofBaseApp{
     
         void loadConfigJson();
     		
-        ofVideoGrabber cam;
+       // ofVideoGrabber cam;
     
         DataManager     dataManager;
         TrackingManager trackingManager;
@@ -55,5 +55,7 @@ class ofApp : public ofBaseApp{
         ofJson configJson;
         ofFile configJsonFile;
         int configJsonTimeStamp;
+
+	ofGstVideoUtils cam;
     
 };
