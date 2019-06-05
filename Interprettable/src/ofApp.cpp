@@ -126,7 +126,7 @@ void ofApp::update(){
     int diff    = curTime - currentTimeMillis;
     
     // if nothings happends for 10mn, restart.
-    if( diff > 600000) {
+    if( diff > 10000) {
         int start = 0;
         onMarkerFoundHandler(start);
     }
