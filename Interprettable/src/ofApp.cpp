@@ -207,14 +207,18 @@ void ofApp::loadConfigJson() {
 
 void ofApp::onMarkerFoundHandler(int & markerId) {
     
-    ofLogNotice("Marker found !" ) << trackingManager.getLabel(markerId);
     
-    if( markerId == trackingManager.detector.getLowestScoreIndex()) 
-    sceneManager.setScenario(&dataManager.scenarios[markerId]);
-    logger.logScenario(ofToString(markerId));
+    if( markerId == trackingManager.detector.getLowestScoreIndex()) {
+        
+        ofLogNotice("Marker found !" ) << trackingManager.getLabel(markerId);
+
+        sceneManager.setScenario(&dataManager.scenarios[markerId]);
+        logger.logScenario(ofToString(markerId));
     
-    // restart time
-    currentTimeMillis  = ofGetElapsedTimeMillis();
+        // restart time
+        currentTimeMillis  = ofGetElapsedTimeMillis();
+        
+    }
 
 }
 
