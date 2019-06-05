@@ -11,6 +11,7 @@
 #include "ofMain.h"
 #include "ScenarioData.hpp"
 #include "WelcomePage.hpp"
+#include "ofxAnimatableFloat.h"
 
 class SceneManager {
   
@@ -29,6 +30,7 @@ public:
 private:
     
     ofImage leftImage;
+    ofxAnimatableFloat leftImagePos;
     
     int currentScenarioID;
     ScenarioData * currentScenario;

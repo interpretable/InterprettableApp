@@ -17,7 +17,7 @@ public:
     
     void setup(string url);
     void update();
-    void draw(float x, float y, float rectInnerMargin, float radius = 20);
+    void draw(float x, float y, float rectInnerMargin, float radius = 10);
     
     void show(float duration = 1.0, float delay = 0.0);
     void hide(float duration = 1.0, float delay = 0.0);

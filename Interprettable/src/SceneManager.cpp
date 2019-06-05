@@ -20,10 +20,15 @@ void SceneManager::setup() {
     welcomePage.setup();
     welcomePage.show();
     
+    
+    leftImagePos.reset(-leftImage.getWidth());
+    leftImagePos.setDuration(2.0);
+    
 }
 
 void SceneManager::update() {
     
+    leftImagePos.update(1.0 / 60.0f);
     welcomePage.update();
     
     
@@ -35,7 +40,7 @@ void SceneManager::draw() {
 
     
     if(currentScenarioID > 0) {
-        
+    
         drawBack();
         
     } 
@@ -55,7 +60,8 @@ void SceneManager::draw() {
 
 void SceneManager::drawBack() {
     
-    leftImage.draw(margin,margin);
+    ofSetColor(255);
+    leftImage.draw(margin + leftImagePos.getCurrentValue(),margin);
     
     
 }
@@ -82,7 +88,7 @@ void SceneManager::drawScenario(ScenarioData * scenario) {
         case 1:
             
             for(int i=0; i<scenario->images.size(); i++) {
-                scenario->images[i].draw(0.0, 0.0, rectInnerMargin, 20);
+                scenario->images[i].draw(0.0, 0.0, rectInnerMargin);
             }
             
             break;
@@ -91,7 +97,7 @@ void SceneManager::drawScenario(ScenarioData * scenario) {
             
             float y = 0.0;
             for(int i=0; i<scenario->images.size(); i++) {
-                scenario->images[i].draw(0.0, y, rectInnerMargin, 20);
+                scenario->images[i].draw(0.0, y, rectInnerMargin);
                 y +=  currentScenario->images[i].getHeight() + margin;
             }
             
@@ -102,7 +108,7 @@ void SceneManager::drawScenario(ScenarioData * scenario) {
             
             float y = 0.0;
             for(int i=0; i<scenario->images.size(); i++) {
-                scenario->images[i].draw(0.0, y, rectInnerMargin, 20);
+                scenario->images[i].draw(0.0, y, rectInnerMargin);
                 y +=  scenario->images[i].getHeight() + margin;
             }
             
@@ -116,7 +122,7 @@ void SceneManager::drawScenario(ScenarioData * scenario) {
             for(int i=0; i<scenario->images.size(); i++) {
                 
                 ofSetColor(255, 255);
-                scenario->images[i].draw(x, y, rectInnerMargin, 20);
+                scenario->images[i].draw(x, y, rectInnerMargin);
                 if(i < 2) {
                     y += scenario->images[i].getHeight() + margin;
                 } else {
@@ -149,23 +155,29 @@ void SceneManager::setScenario(ScenarioData * scenario) {
 
         int nImages = outScenario->images.size();
         for(int i=0; i<nImages; i++) {
-            outScenario->images[i].hide(1.0);
+            outScenario->images[i].hide(1.0,i / 8.0);
         }
         
-        if(outScenario == 0)
+        if(outScenario != 0) {
             welcomePage.hide();
+            leftImagePos.animateTo(0.0);
+        }
 
     }
     
     currentScenarioID   = scenario->id;
     currentScenario     = scenario;
     
-    if(currentScenario == 0)
+    if(currentScenario == 0) {
         welcomePage.show();
+        leftImagePos.animateTo(-leftImage.getWidth());
+
+        
+    }
     
     int nImages = currentScenario->images.size();
     for(int i=0; i<nImages; i++) {
-        currentScenario->images[i].show(1.0);
+        currentScenario->images[i].show(1.0, i / 8.0);
     }
 
     

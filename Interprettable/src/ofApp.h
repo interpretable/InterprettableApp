@@ -31,9 +31,7 @@ class ofApp : public ofBaseApp{
         void onMarkerLostHandler(int & markerId);
     
         void loadConfigJson();
-    		
-       // ofVideoGrabber cam;
-    
+    		    
         DataManager     dataManager;
         TrackingManager trackingManager;
         SceneManager    sceneManager;
@@ -55,7 +53,15 @@ class ofApp : public ofBaseApp{
         ofJson configJson;
         ofFile configJsonFile;
         int configJsonTimeStamp;
+    
+#ifdef __linux__
 
-	ofGstVideoUtils cam;
+        ofGstVideoUtils cam;
+    
+#else
+    
+        ofVideoGrabber cam;
+    
+#endif
     
 };

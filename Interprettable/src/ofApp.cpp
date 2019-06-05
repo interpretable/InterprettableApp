@@ -10,24 +10,31 @@ void ofApp::setup(){
     
     ofSetFrameRate(60);
     ofSetLogLevel(OF_LOG_NOTICE);
+    ofSetEscapeQuitsApp(true);
+    
+
     
     configJsonFile.open("config.json");
     loadConfigJson();
     
     dataManager.getItems(configJson["backoffice-getall-url"]);
     sceneManager.setup();
+  
+#ifdef __linux__
     
-/*
+    cam.allocate(1280,720, OF_PIXELS_RGB);
+    cam.setPipeline("v4l2src device=/dev/video0 ! queue ! video/x-h264,width=1280,height=720,framerate=30/1 ! h264parse ! avdec_h264 ! videoconvert", OF_PIXELS_RGB, false, 1280, 720);
+    cam.startPipeline();
+    cam.play();
+
+#else
+
     cam.listDevices();
     cam.setDeviceID(0);
     cam.setup(configJson["webcam-width"],configJson["webcam-height"]);
-*/
-
-	cam.allocate(1280,720, OF_PIXELS_RGB);
-    cam.setPipeline("v4l2src device=/dev/video0 ! queue ! video/x-h264,width=1280,height=720,framerate=30/1 ! h264parse ! avdec_h264 ! videoconvert", OF_PIXELS_RGB, false, 1280, 720);
-   // cam.setup(configJson["webcam-width"],configJson["webcam-height"]);
-    cam.startPipeline();
-	cam.play();
+    
+    
+#endif
 
     trackingManager.setup();
     
@@ -237,7 +244,15 @@ void ofApp::keyPressed(int key){
         
     }
     
-
+    
+    if (key == 's') {
+        
+        
+        int rdm = floor(ofRandom(dataManager.scenarios.size()));
+        sceneManager.setScenario(&dataManager.scenarios[rdm]);
+        
+    }
+    
     if (key == 'f')
         ofToggleFullscreen();
     
