@@ -96,7 +96,7 @@ void SceneManager::drawScenario(ScenarioData * scenario) {
             float y = 0.0;
             for(int i=0; i<scenario->images.size(); i++) {
                 scenario->images[i].draw(0.0, y, rectInnerMargin);
-                y +=  currentScenario->images[i].getHeight() + margin;
+                y +=  scenario->images[i].getHeight() + margin;
             }
             
             break;

@@ -15,7 +15,7 @@ class RoundedRectImage : public ofImage {
     
 public:
     
-    void setup(string url);
+    bool setup(string url);
     void update();
     void draw(float x, float y, float rectInnerMargin, float radius = 10);
     

@@ -15,8 +15,12 @@ void ScenarioData::parse(ofJson & json, int id) {
     for(size_t i=0; i<json["medias"].size(); i++) {
         
         RoundedRectImage image;
-        image.setup(json["medias"][i]);
-        images.push_back(image);
+        
+        if(image.setup(json["medias"][i])) {
+            
+            images.push_back(image);
+            
+        }
         
        // ofLogNotice("json[i]") << json["medias"][i];
 

@@ -8,14 +8,15 @@
 #include "RoundedRectImage.hpp"
 
 
-void RoundedRectImage::setup(string url) {
+bool RoundedRectImage::setup(string url) {
     
-    this->load(url);
     
     opacityPct.reset(0.0);
     opacityPct.setRepeatType(PLAY_ONCE);
 
     
+    return this->load(url);
+
 }
 
 void RoundedRectImage::update() {
