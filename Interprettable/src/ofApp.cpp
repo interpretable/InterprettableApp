@@ -55,7 +55,7 @@ void ofApp::setup(){
 
     sceneManager.setScenario(&dataManager.scenarios[0]);
     
-    fbo.allocate(ofGetWidth(), ofGetHeight());
+    fbo.allocate(800, 800);
 
     int x = (ofGetWidth() - fbo.getWidth()) * 0.5;       // center on screen.
     int y = (ofGetHeight() - fbo.getHeight()) * 0.5;     // center on screen.
@@ -163,8 +163,7 @@ void ofApp::draw(){
     ofPopMatrix();
     glDisable(GL_BLEND);
     
-    ofSetColor(0);
-    ofDrawRectangle(800, 0, ofGetWidth() - 800, ofGetHeight());
+    
     
 
     
