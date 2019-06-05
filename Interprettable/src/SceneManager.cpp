@@ -172,7 +172,7 @@ void SceneManager::setScenario(ScenarioData * scenario) {
             
             leftImagePos.animateTo(-leftImage.getWidth());
             
-            if(currentScenarioID == 0 )ı
+            if(currentScenarioID == 0 )
                 rightImagePos.animateTo(800);
             else
                 rightImagePos.animateTo(0.0);
