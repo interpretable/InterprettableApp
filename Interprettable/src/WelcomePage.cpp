@@ -41,6 +41,12 @@ void WelcomePage::update() {
 
 void WelcomePage::draw() {
     
+    ofPushMatrix();
+    ofTranslate(400,400);
+    float scale = ofMap(opacity.getCurrentValue(), 0, 255, 0.8, 1.0);
+    ofScale(scale, scale);
+    ofTranslate(-400, -400);
+    
     if( opacity.getCurrentValue() > 0.0 ) {
     
         drawCircleNoise(ofVec2f(200,200), 100, ofColor(198, 223, 227, opacity.getCurrentValue()));
@@ -53,6 +59,8 @@ void WelcomePage::draw() {
         drawText();
         
     }
+            
+    ofPopMatrix();
 
     
 }

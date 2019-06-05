@@ -24,11 +24,16 @@ void SceneManager::setup() {
     leftImagePos.reset(-leftImage.getWidth());
     leftImagePos.setDuration(2.0);
     
+    rightImagePos.reset(800);
+    rightImagePos.setDuration(2.0);
+    
 }
 
 void SceneManager::update() {
     
     leftImagePos.update(1.0 / 60.0f);
+    rightImagePos.update(1.0 / 60.0f);
+
     welcomePage.update();
     
     
@@ -39,12 +44,9 @@ void SceneManager::draw() {
     welcomePage.draw();
 
     
-    if(currentScenarioID > 0) {
-    
-        drawBack();
+    drawBack();
         
-    } 
-    
+
     
     if(outScenario) {
         drawScenario(outScenario);
@@ -71,9 +73,8 @@ void SceneManager::drawScenario(ScenarioData * scenario) {
     
     
     float x = margin;
-    if(currentScenarioID > 0) {
-        x += leftImage.getWidth();
-    }
+    x += rightImagePos.getCurrentValue();
+    
     
     ofPushMatrix();
     ofTranslate(x, margin);
@@ -158,26 +159,35 @@ void SceneManager::setScenario(ScenarioData * scenario) {
             outScenario->images[i].hide(1.0,i / 8.0);
         }
         
-        if(currentScenarioID != 0) {
-            welcomePage.hide();
-            leftImagePos.animateTo(0.0);
-        }
+        ofLogNotice("hiding... ") << currentScenarioID;
+
+       
 
     }
     
     currentScenarioID   = scenario->id;
     currentScenario     = scenario;
     
+    ofLogNotice("set scenario ") << currentScenarioID;
+    
     if(currentScenarioID == 0) {
         welcomePage.show();
         leftImagePos.animateTo(-leftImage.getWidth());
+        rightImagePos.animateTo(800);
 
         
-    }
+    } else {
+        
+        welcomePage.hide();
+        leftImagePos.animateTo(0.0);
+        rightImagePos.animateTo(leftImage.getWidth());
+        
     
-    int nImages = currentScenario->images.size();
-    for(int i=0; i<nImages; i++) {
-        currentScenario->images[i].show(1.0, i / 8.0);
+        int nImages = currentScenario->images.size();
+        for(int i=0; i<nImages; i++) {
+            currentScenario->images[i].show(1.0, i / 8.0);
+        }
+        
     }
 
     

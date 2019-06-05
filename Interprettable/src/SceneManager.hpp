@@ -30,7 +30,7 @@ public:
 private:
     
     ofImage leftImage;
-    ofxAnimatableFloat leftImagePos;
+    ofxAnimatableFloat leftImagePos, rightImagePos;
     
     int currentScenarioID;
     ScenarioData * currentScenario;
