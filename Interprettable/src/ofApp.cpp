@@ -3,6 +3,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
+    ofLogNotice("Setting up");
+
     bDebugMode      = false;
     bDebugWarpMode  = false;
     
@@ -16,6 +18,8 @@ void ofApp::setup(){
     
     dataManager.getItems(configJson["backoffice-getall-url"]);
     sceneManager.setup();
+    
+    ofLogNotice("Setting up camera");
   
 #ifdef __linux__
     
@@ -33,6 +37,8 @@ void ofApp::setup(){
     
 #endif
 
+    ofLogNotice("Setting tracking manager");
+
     trackingManager.setup();
     
     // add pictures
@@ -45,6 +51,8 @@ void ofApp::setup(){
     ofAddListener(trackingManager.onMarkerLost, this, &ofApp::onMarkerLostHandler);
     trackingManager.start();
     
+    ofLogNotice("Setting scene manager");
+
     sceneManager.setScenario(&dataManager.scenarios[0]);
     
     fbo.allocate(ofGetWidth(), ofGetHeight());
@@ -54,6 +62,9 @@ void ofApp::setup(){
     int w = fbo.getWidth();
     int h = fbo.getHeight();
     
+    
+    ofLogNotice("Setting up warp");
+
     // quad warping 
     warper.setSourceRect(ofRectangle(0, 0, w, h));
     warper.setTopLeftCornerPosition(ofPoint(x, y));
@@ -183,8 +194,15 @@ void ofApp::exit() {
     
     warper.save();
     trackingManager.detector.stop();
-    
     logger.log("end");
+    
+#ifdef __linux__
+    
+   
+    cam.stop();
+    cam.close();
+    
+#endif
 
 }
 
