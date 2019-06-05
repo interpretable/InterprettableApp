@@ -6,13 +6,9 @@ void ofApp::setup(){
     bDebugMode      = false;
     bDebugWarpMode  = false;
     
-    ofSetFullscreen(true);
-    
     ofSetFrameRate(60);
     ofSetLogLevel(OF_LOG_NOTICE);
     ofSetEscapeQuitsApp(true);
-    
-
     
     configJsonFile.open("config.json");
     loadConfigJson();
@@ -72,12 +68,16 @@ void ofApp::setup(){
     logger.setup();
     logger.log("start");
 
-    ofSetFullscreen(true);
+
     
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    
+    if(ofGetFrameNum() == 5 ) {
+        ofSetFullscreen(true);
+    }
     
     sceneManager.update();
     
