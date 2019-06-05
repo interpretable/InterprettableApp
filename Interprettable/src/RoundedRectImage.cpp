@@ -33,6 +33,8 @@ void RoundedRectImage::draw(float x, float y, float rectInnerMargin, float radiu
     
     ofSetColor(126, 255 * opacityPct.getCurrentValue());
     ofDrawRectRounded(x + rectInnerMargin, y + rectInnerMargin, w - rectInnerMargin * 2, h - rectInnerMargin * 2, radius);
+    ofSetColor(255, 255 * opacityPct.getCurrentValue());
+
     ofImage::draw(x, y, w, h);
     
     
