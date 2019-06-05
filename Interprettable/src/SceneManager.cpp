@@ -164,28 +164,29 @@ void SceneManager::setScenario(ScenarioData * scenario) {
        
 
     }
+    if ( scenario->id != currentScenarioID ) {
     
-    currentScenarioID   = scenario->id;
-    currentScenario     = scenario;
-    
-    ofLogNotice("set scenario ") << currentScenarioID;
-    
-    if(currentScenarioID == 0) {
-        welcomePage.show();
-        leftImagePos.animateTo(-leftImage.getWidth());
-        rightImagePos.animateTo(800);
+        currentScenarioID   = scenario->id;
+        currentScenario     = scenario;
+                
+        if(currentScenarioID == 0) {
+            welcomePage.show();
+            leftImagePos.animateTo(-leftImage.getWidth());
+            rightImagePos.animateTo(800);
 
+            
+        } else {
+            
+            welcomePage.hide();
+            leftImagePos.animateTo(0.0);
+            rightImagePos.animateTo(leftImage.getWidth());
+            
         
-    } else {
-        
-        welcomePage.hide();
-        leftImagePos.animateTo(0.0);
-        rightImagePos.animateTo(leftImage.getWidth());
-        
-    
-        int nImages = currentScenario->images.size();
-        for(int i=0; i<nImages; i++) {
-            currentScenario->images[i].show(1.0, i / 8.0);
+            int nImages = currentScenario->images.size();
+            for(int i=0; i<nImages; i++) {
+                currentScenario->images[i].show(1.0, i / 8.0);
+            }
+            
         }
         
     }
