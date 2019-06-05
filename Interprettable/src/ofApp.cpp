@@ -61,11 +61,18 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    // check for config changes
-    int currentTimeStamp = std::filesystem::last_write_time(configJsonFile);
+    sceneManager.update();
     
-    if(currentTimeStamp != configJsonTimeStamp) {
-        loadConfigJson();
+    
+    if(ofGetFrameNum() % 100 == 0) {
+        
+        // check for config changes
+        int currentTimeStamp = std::filesystem::last_write_time(configJsonFile);
+        
+        if(currentTimeStamp != configJsonTimeStamp) {
+            loadConfigJson();
+        }
+        
     }
     
     cam.update();
@@ -81,7 +88,7 @@ void ofApp::update(){
     
     // check for inactivity
     int curTime = ofGetElapsedTimeMillis();
-    int diff = curTime - currentTimeMillis;
+    int diff    = curTime - currentTimeMillis;
     
     // if nothings happends for 10mn, restart.
     if( diff > 600000) {

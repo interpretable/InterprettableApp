@@ -24,6 +24,7 @@
 		6AABAB39E82AF5CFEA23A205 /* ContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FBB4A8427353AED09174BE5 /* ContourFinder.cpp */; };
 		74D31933EE82E12834DB3B06 /* ofxAnimatableOfColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 777D89F9EECAC3FE2405D5D1 /* ofxAnimatableOfColor.cpp */; };
 		7CDAD32BE4FA46701E3552C7 /* RunningBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CBF6AED6A17AC0C17F63CC4 /* RunningBackground.cpp */; };
+		835E087222A7B51B0041F5BE /* WelcomePage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 835E087022A7B51B0041F5BE /* WelcomePage.cpp */; };
 		83841387228C486F006D23E7 /* RoundedRectImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83841385228C486F006D23E7 /* RoundedRectImage.cpp */; };
 		83CF744522957E3F00E9998A /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83CF744322957E3F00E9998A /* Logger.cpp */; };
 		A6668C5B1272D7FCD5B5A16F /* Utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6CEC50DB3D06414010233963 /* Utilities.cpp */; };
@@ -256,6 +257,8 @@
 		820102E51B125101D727B3CC /* ETF.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ETF.h; path = ../../../addons/ofxCv/libs/CLD/include/CLD/ETF.h; sourceTree = SOURCE_ROOT; };
 		826D2BD7602562E48C8B3953 /* common.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = common.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/cuda/common.hpp; sourceTree = SOURCE_ROOT; };
 		8326CDEDA153D242D924D2B6 /* Flow.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = Flow.h; path = ../../../addons/ofxCv/libs/ofxCv/include/ofxCv/Flow.h; sourceTree = SOURCE_ROOT; };
+		835E087022A7B51B0041F5BE /* WelcomePage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = WelcomePage.cpp; sourceTree = "<group>"; };
+		835E087122A7B51B0041F5BE /* WelcomePage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = WelcomePage.hpp; sourceTree = "<group>"; };
 		83841385228C486F006D23E7 /* RoundedRectImage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RoundedRectImage.cpp; sourceTree = "<group>"; };
 		83841386228C486F006D23E7 /* RoundedRectImage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RoundedRectImage.hpp; sourceTree = "<group>"; };
 		83929E5F90BCDD1254F12E70 /* DataManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = DataManager.cpp; path = src/DataManager.cpp; sourceTree = SOURCE_ROOT; };
@@ -1887,6 +1890,8 @@
 				83841386228C486F006D23E7 /* RoundedRectImage.hpp */,
 				83CF744322957E3F00E9998A /* Logger.cpp */,
 				83CF744422957E3F00E9998A /* Logger.hpp */,
+				835E087022A7B51B0041F5BE /* WelcomePage.cpp */,
+				835E087122A7B51B0041F5BE /* WelcomePage.hpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -2113,6 +2118,7 @@
 				6AABAB39E82AF5CFEA23A205 /* ContourFinder.cpp in Sources */,
 				C602002DE761F9B52DB4400A /* ObjectFinder.cpp in Sources */,
 				A6668C5B1272D7FCD5B5A16F /* Utilities.cpp in Sources */,
+				835E087222A7B51B0041F5BE /* WelcomePage.cpp in Sources */,
 				311DF864378748129984EA1D /* Kalman.cpp in Sources */,
 				45CC483A999BF1065A6B926C /* Distance.cpp in Sources */,
 				B6840996567E78436F7ECFAB /* ETF.cpp in Sources */,

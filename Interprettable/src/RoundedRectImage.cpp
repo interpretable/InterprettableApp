@@ -38,17 +38,17 @@ void RoundedRectImage::draw(float x, float y, float rectInnerMargin, float radiu
     
 }
 
-void RoundedRectImage::show(float duration) {
+void RoundedRectImage::show(float duration, float delay) {
     
     opacityPct.setCurve(EASE_IN);
     opacityPct.setDuration(duration);
-    opacityPct.animateTo(1.0);
+    opacityPct.animateToAfterDelay(1.0, delay);
 }
 
-void RoundedRectImage::hide(float duration) {
+void RoundedRectImage::hide(float duration, float delay) {
     
     opacityPct.setCurve(EASE_OUT);
     opacityPct.setDuration(duration);
-    opacityPct.animateTo(0.0);
+    opacityPct.animateToAfterDelay(0.0, delay);
     
 }

@@ -17,31 +17,39 @@ void SceneManager::setup() {
     margin = 0;
     rectInnerMargin  = 5;
     
+    welcomePage.setup();
+    welcomePage.show();
     
 }
 
 void SceneManager::update() {
     
-    
+    welcomePage.update();
     
     
 }
 
 void SceneManager::draw() {
     
+    welcomePage.draw();
+
+    
     if(currentScenarioID > 0) {
         
         drawBack();
         
-    }
-
+    } 
+    
+    
     if(outScenario) {
         drawScenario(outScenario);
     }
     
-    if(currentScenario) {
+    if(currentScenario && currentScenarioID > 0 ) {
         drawScenario(currentScenario);
     }
+        
+    
     
 }
 
@@ -143,11 +151,17 @@ void SceneManager::setScenario(ScenarioData * scenario) {
         for(int i=0; i<nImages; i++) {
             outScenario->images[i].hide(1.0);
         }
+        
+        if(outScenario == 0)
+            welcomePage.hide();
 
     }
     
     currentScenarioID   = scenario->id;
     currentScenario     = scenario;
+    
+    if(currentScenario == 0)
+        welcomePage.show();
     
     int nImages = currentScenario->images.size();
     for(int i=0; i<nImages; i++) {

@@ -10,6 +10,7 @@
 
 #include "ofMain.h"
 #include "ScenarioData.hpp"
+#include "WelcomePage.hpp"
 
 class SceneManager {
   
@@ -35,6 +36,8 @@ private:
 
     int margin;
     int rectInnerMargin;
+    
+    WelcomePage welcomePage;
     
     // time handling
     int currentTimeMillis;
