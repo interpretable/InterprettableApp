@@ -221,7 +221,7 @@ void ofApp::loadConfigJson() {
     configJson = ofLoadJson("config.json");
     cropRectangle.set( configJson["camera_crop"]["x"], configJson["camera_crop"]["y"], configJson["camera_crop"]["width"], configJson["camera_crop"]["height"]);
     trackingManager.setProps(configJson["features-tracking-ratio"], configJson["features-ntries"]);
-    
+   // trackingManager.detector.setExtractorSettings(60, 4);
     
 }
 
@@ -310,8 +310,8 @@ void ofApp::mouseDragged(int x, int y, int button){
         cropRectangle.x = storedMousePosition.x;
         cropRectangle.y = storedMousePosition.y;
 
-        cropRectangle.width = x - cropRectangle.x;
-        cropRectangle.height = y - cropRectangle.y;
+        cropRectangle.width = ofClamp(x - cropRectangle.x, 240, 1200);
+        cropRectangle.height = ofClamp(y - cropRectangle.y, 200, 1200);
         
         configJson["camera_crop"]["x"] = cropRectangle.x;
         configJson["camera_crop"]["y"] = cropRectangle.y;

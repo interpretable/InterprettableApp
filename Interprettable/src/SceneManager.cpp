@@ -150,6 +150,8 @@ void SceneManager::onScenarioOutHandler() {
 
 void SceneManager::setScenario(ScenarioData * scenario) {
     
+    if(!scenario)
+        return;
     
     if ( scenario->id != currentScenarioID ) {
 
