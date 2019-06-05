@@ -162,6 +162,10 @@ void ofApp::draw(){
     fbo.draw(0, 0);
     ofPopMatrix();
     glDisable(GL_BLEND);
+    
+    ofSetColor(0);
+    ofDrawRectangle(800, 0, ofGetWidth() - 800, ofGetHeight());
+    
 
     
     if(bDebugWarpMode) {
