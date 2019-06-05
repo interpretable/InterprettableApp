@@ -158,7 +158,7 @@ void SceneManager::setScenario(ScenarioData * scenario) {
             outScenario->images[i].hide(1.0,i / 8.0);
         }
         
-        if(outScenario != 0) {
+        if(currentScenarioID != 0) {
             welcomePage.hide();
             leftImagePos.animateTo(0.0);
         }
@@ -168,7 +168,7 @@ void SceneManager::setScenario(ScenarioData * scenario) {
     currentScenarioID   = scenario->id;
     currentScenario     = scenario;
     
-    if(currentScenario == 0) {
+    if(currentScenarioID == 0) {
         welcomePage.show();
         leftImagePos.animateTo(-leftImage.getWidth());
 

@@ -182,6 +182,8 @@ void ofApp::draw(){
 void ofApp::exit() {
     
     warper.save();
+    trackingManager.detector.stop();
+    
     logger.log("end");
 
 }
@@ -246,10 +248,13 @@ void ofApp::keyPressed(int key){
     
     
     if (key == 's') {
-        
-        
         int rdm = floor(ofRandom(dataManager.scenarios.size()));
         sceneManager.setScenario(&dataManager.scenarios[rdm]);
+        
+    }
+    
+    if (key == 'i') {
+        sceneManager.setScenario(&dataManager.scenarios[0]);
         
     }
     
