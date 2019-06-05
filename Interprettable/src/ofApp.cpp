@@ -76,9 +76,14 @@ void ofApp::setup(){
     warper.disableMouseControls();
     warper.disableKeyboardShortcuts();
     
+    
+    ofLogNotice("Setting up logger");
+
     currentTimeMillis  = ofGetElapsedTimeMillis();
     logger.setup();
     logger.log("start");
+
+    ofLogNotice("Setting up done");
 
 
     
