@@ -17,7 +17,6 @@ void DataManager::getItems(string url) {
     
     // load main json
     ofHttpResponse resp = ofLoadURL(url);
-    cout << resp.data << endl;
     mainJson = nlohmann::json::parse(resp.data);
     
     for(int i=0; i<mainJson.size(); i++) {

@@ -167,9 +167,8 @@ void ofApp::draw(){
     
     if(bDebugMode) {
 
-	
-	ofImage image;
-	image.setFromPixels(cam.getPixels());
+        ofImage image;
+        image.setFromPixels(cam.getPixels());
         image.draw(0.0,0.0);
         ofNoFill();
         ofSetColor(255,0,0);
@@ -208,8 +207,7 @@ void ofApp::loadConfigJson() {
 
 void ofApp::onMarkerFoundHandler(int & markerId) {
     
-    ofLogNotice("Marker found !" ) << markerId;
-    ofLogNotice("Marker min is !" ) << trackingManager.detector.getLowestScoreIndex();
+    ofLogNotice("Marker found !" ) << trackingManager.getLabel(markerId);
     
     if( markerId == trackingManager.detector.getLowestScoreIndex()) 
     sceneManager.setScenario(&dataManager.scenarios[markerId]);
