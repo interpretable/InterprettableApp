@@ -150,21 +150,24 @@ void SceneManager::onScenarioOutHandler() {
 
 void SceneManager::setScenario(ScenarioData * scenario) {
     
-    if(currentScenario) {
-        
-        outScenario     = currentScenario;
-
-        int nImages = outScenario->images.size();
-        for(int i=0; i<nImages; i++) {
-            outScenario->images[i].hide(1.0,i / 8.0);
-        }
-        
-        ofLogNotice("hiding... ") << currentScenarioID;
-
-       
-
-    }
+    
     if ( scenario->id != currentScenarioID ) {
+
+        
+        if(currentScenario) {
+            
+            outScenario     = currentScenario;
+
+            int nImages = outScenario->images.size();
+            for(int i=0; i<nImages; i++) {
+                outScenario->images[i].hide(1.0,i / 8.0);
+            }
+            
+            ofLogNotice("hiding... ") << currentScenarioID;
+
+           
+
+        }
     
         currentScenarioID   = scenario->id;
         currentScenario     = scenario;
