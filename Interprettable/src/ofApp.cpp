@@ -9,6 +9,7 @@ void ofApp::setup(){
     ofSetFrameRate(60);
     ofSetLogLevel(OF_LOG_NOTICE);
     ofSetEscapeQuitsApp(true);
+    ofHideCursor();
     
     configJsonFile.open("config.json");
     loadConfigJson();
@@ -230,6 +231,9 @@ void ofApp::keyPressed(int key){
     
     if(key == 'd')
         bDebugMode = !bDebugMode;
+    
+    if(key == 'c')
+        ofShowCursor();
     
     if(key == 'w') {
         
