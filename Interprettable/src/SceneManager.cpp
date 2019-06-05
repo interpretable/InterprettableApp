@@ -43,16 +43,14 @@ void SceneManager::draw() {
     
     welcomePage.draw();
 
-    
     drawBack();
-        
-
     
     if(outScenario) {
         drawScenario(outScenario);
     }
     
     if(currentScenario && currentScenarioID > 0 ) {
+        ofLogNotice("draw scenario... ") << currentScenarioID;
         drawScenario(currentScenario);
     }
         
@@ -184,13 +182,15 @@ void SceneManager::setScenario(ScenarioData * scenario) {
         }
                 
         if(currentScenarioID == 0 ) {
+            
             welcomePage.show();
             
-          
-
             
         } else {
             
+            
+            ofLogNotice("load scenario... ") << currentScenarioID;
+
             welcomePage.hide();
                     
             int nImages = currentScenario->images.size();
