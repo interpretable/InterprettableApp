@@ -50,7 +50,6 @@ void SceneManager::draw() {
     }
     
     if(currentScenario && currentScenarioID > 0 ) {
-        ofLogNotice("draw scenario... ") << currentScenarioID;
         drawScenario(currentScenario);
     }
         
@@ -177,7 +176,12 @@ void SceneManager::setScenario(ScenarioData * scenario) {
         } else {
             
             leftImagePos.animateTo(0.0);
-            rightImagePos.animateTo(leftImage.getWidth());
+            
+            if(currentScenarioID == 0 )
+                rightImagePos.animateTo(leftImage.getWidth());
+            else
+                rightImagePos.animateTo(0.0);
+
             
         }
                 
@@ -189,8 +193,6 @@ void SceneManager::setScenario(ScenarioData * scenario) {
         } else {
             
             
-            ofLogNotice("load scenario... ") << currentScenarioID;
-
             welcomePage.hide();
                     
             int nImages = currentScenario->images.size();
