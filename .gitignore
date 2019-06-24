@@ -3,6 +3,8 @@
 #########################
 
 Interprettable/bin/data/logs/*
+Interprettable/bin/data/uploadedlogs/*
+
 Interprettable/bin/Interprettable.app/*
 Interprettable/bin/data/logs/*
 # don't ignore the .gitignore file

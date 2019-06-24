@@ -54,6 +54,8 @@ class ofApp : public ofBaseApp{
         ofFile configJsonFile;
         int configJsonTimeStamp;
     
+        int machineId;
+    
 #ifdef __linux__
 
         ofGstVideoUtils cam;

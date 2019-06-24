@@ -19,7 +19,7 @@ public:
     vector<RoundedRectImage> images;
     
     int id;
-    
+    string theme;
 };
 
 #endif /* ScenarioData_hpp */

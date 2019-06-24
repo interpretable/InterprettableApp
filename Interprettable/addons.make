@@ -1,5 +1,12 @@
 ofxAnimatable
 ofxCv
 ofxFeatureDetector
+ofxHTTP
+ofxIO
+ofxMediaType
+ofxNetwork
+ofxNetworkUtils
 ofxOpenCv
+ofxPoco
 ofxQuadWarp
+ofxSSLManager

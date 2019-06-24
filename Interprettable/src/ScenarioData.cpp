@@ -10,7 +10,7 @@
 void ScenarioData::parse(ofJson & json, int id) {
     
     this->id = id;
-    
+    this->theme = json["thematic_name"];
     // load images
     for(size_t i=0; i<json["medias"].size(); i++) {
         

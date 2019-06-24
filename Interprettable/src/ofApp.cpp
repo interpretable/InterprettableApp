@@ -80,6 +80,10 @@ void ofApp::setup(){
     ofLogNotice("Setting up logger");
 
     currentTimeMillis  = ofGetElapsedTimeMillis();
+    
+    string loggerUrl = configJson.value("backoffice-log-post-url", "http://interpretable.erasme.org/api/public/api/machine") + "/" + ofToString(machineId);
+    
+    logger.setUrl(loggerUrl);
     logger.setup();
     logger.log("start");
 
@@ -203,6 +207,8 @@ void ofApp::exit() {
     warper.save();
     trackingManager.detector.stop();
     logger.log("end");
+   // logger.uploadLog();
+    
     
 #ifdef __linux__
     
@@ -224,6 +230,9 @@ void ofApp::loadConfigJson() {
     configJson = ofLoadJson("config.json");
     cropRectangle.set( configJson["camera_crop"]["x"], configJson["camera_crop"]["y"], configJson["camera_crop"]["width"], configJson["camera_crop"]["height"]);
     trackingManager.setProps(configJson["features-tracking-ratio"], configJson["features-ntries"]);
+    
+    machineId = configJson.value("machine-id", 0);
+    
    // trackingManager.detector.setExtractorSettings(60, 4);
     
 }
@@ -237,9 +246,9 @@ void ofApp::onMarkerFoundHandler(int & markerId) {
     if( markerId == trackingManager.detector.getLowestScoreIndex()) {
         
         ofLogNotice("Marker found !" ) << trackingManager.getLabel(markerId);
-
+        
         sceneManager.setScenario(&dataManager.scenarios[markerId]);
-        logger.logScenario(ofToString(markerId));
+        logger.logScenario(markerId,dataManager.scenarios[markerId].theme);
     
         // restart time
         currentTimeMillis  = ofGetElapsedTimeMillis();
