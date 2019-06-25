@@ -31,7 +31,7 @@ void ofApp::setup(){
 #else
 
     cam.listDevices();
-    cam.setDeviceID(0);
+    cam.setDeviceID(2);
     cam.setup(configJson["webcam-width"],configJson["webcam-height"]);
     
     
@@ -204,9 +204,10 @@ void ofApp::draw(){
 
 void ofApp::exit() {
     
-    warper.save();
-    trackingManager.detector.stop();
     logger.log("end");
+    warper.save();
+    std::exit(0);
+    trackingManager.detector.stop();
    // logger.uploadLog();
     
     
