@@ -27,3 +27,8 @@ Compile app :
     cd openFrameworks/apps/InterprettableApp/Interprettable/
     make -j4
     make RunRelease
+
+Configure app :
+
+    nano  openFrameworks/apps/InterprettableApp/Interprettable/bin/data/config.json
+Configure `machine-id` with right id in database
