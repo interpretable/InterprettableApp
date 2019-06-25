@@ -25,6 +25,7 @@ Download, compile and install openCV :
 Compile app : 
 
     cd openFrameworks/apps/InterprettableApp/Interprettable/
+    make clean
     make -j4
     make RunRelease
 
