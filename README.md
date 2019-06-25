@@ -15,6 +15,7 @@ Navigate to Desktop :
 Download installation script : 
 
     wget -O install.sh https://gist.githubusercontent.com/martial/41d58672af223042d7b366895d1ac3e5/raw/2a2a940f41c5887de0ee3b9079f45039cf9ccf14/interpretable.sh
+    sh ./install.sh
 
 Download, compile and install openCV :
 
