@@ -7,7 +7,7 @@
 
   
 
-**Installation steps :** 
+**Installation steps :**    
 Navigate to Desktop :   
 
     cd ~/Bureau
