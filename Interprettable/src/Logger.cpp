@@ -46,13 +46,14 @@ void Logger::log(string name, vector<string> args) {
     
 }
 
-void Logger::logScenario(int id, string name) {
+void Logger::logScenario(int id, string thematicName,  string cardname) {
     
     auto jsonObject = nlohmann::json::object();
     jsonObject["time"] = getTime();
     jsonObject["thematic_id"] = id;
-    jsonObject["name"] = name;
-    
+    jsonObject["card-name"] = cardname;
+    jsonObject["thematic-name"] = thematicName;
+
     logJson["cards"].push_back(jsonObject);
     ofSaveJson(jsonName, logJson);
     

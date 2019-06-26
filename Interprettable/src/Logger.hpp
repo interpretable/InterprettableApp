@@ -19,7 +19,7 @@ public:
     void setup();
     void log(string name);
     void log(string name, vector<string> args);
-    void logScenario(int id, string name);
+    void logScenario(int id, string thematicName,  string cardname);
     
     void uploadLog(string file);
     void batchUploadLog();

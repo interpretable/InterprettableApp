@@ -254,7 +254,7 @@ void ofApp::onMarkerFoundHandler(int & markerId) {
     if( markerId == trackingManager.detector.getLowestScoreIndex()) {
                 
         sceneManager.setScenario(&dataManager.scenarios[markerId]);
-        logger.logScenario(markerId,dataManager.scenarios[markerId].theme);
+        logger.logScenario(markerId,dataManager.scenarios[markerId].themeName, dataManager.scenarios[markerId].cardName);
     
         // restart time
         currentTimeMillis  = ofGetElapsedTimeMillis();
