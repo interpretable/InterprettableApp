@@ -141,6 +141,8 @@ void ofApp::update(){
     int curTime = ofGetElapsedTimeMillis();
     int diff    = curTime - currentTimeMillis;
     
+    ofLogNotice("Time Elapsed") << diff;
+
     // if nothing is detected we lower down the delay, in case of glitch
     int delay = 60000;
     
@@ -152,8 +154,10 @@ void ofApp::update(){
     //======================== check for inactivity, shutdown
     
     curTime = ofGetElapsedTimeMillis();
-    diff    = curTime - currentTimeMillis;
+    diff    = curTime - currentShutDownMillis;
     
+    ofLogNotice("Time Elapsed sotdown") << diff;
+
     // if nothing is detected we lower down the delay, in case of glitch
     delay = 60000*2;
     
@@ -275,7 +279,10 @@ void ofApp::onMarkerFoundHandler(int & markerId) {
             
             ofLogNotice("Log scenario") << dataManager.scenarios[markerId].themeName << " " << dataManager.scenarios[markerId].cardName;
             logger.logScenario(markerId,dataManager.scenarios[markerId].themeName, dataManager.scenarios[markerId].cardName);
-            currentTimeMillis       = ofGetElapsedTimeMillis();
+            
+            if(markerId !=0 )
+                currentTimeMillis       = ofGetElapsedTimeMillis();
+            
             currentShutDownMillis   = ofGetElapsedTimeMillis();
 
         }
