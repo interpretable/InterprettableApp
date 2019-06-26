@@ -31,7 +31,7 @@ void ofApp::setup(){
 #else
 
     cam.listDevices();
-    cam.setDeviceID(2);
+    cam.setDeviceID(0);
     cam.setup(configJson["webcam-width"],configJson["webcam-height"]);
     
     
@@ -76,10 +76,10 @@ void ofApp::setup(){
     warper.disableMouseControls();
     warper.disableKeyboardShortcuts();
     
-    
     ofLogNotice("Setting up logger");
 
-    currentTimeMillis  = ofGetElapsedTimeMillis();
+    currentTimeMillis       = ofGetElapsedTimeMillis();
+    currentShutDownMillis   = ofGetElapsedTimeMillis();
     
     string loggerUrl = configJson.value("backoffice-log-post-url", "http://interpretable.erasme.org/api/public/api/machine") + "/" + ofToString(machineId);
     
@@ -142,12 +142,27 @@ void ofApp::update(){
     int diff    = curTime - currentTimeMillis;
     
     // if nothing is detected we lower down the delay, in case of glitch
-    int delay = ( trackingManager.getNumDetecteds() > 0 ) ? 600000 : 60000;
+    int delay = 60000;
     
-    if( diff > delay) {
+    if(  trackingManager.getNumDetecteds() == 0 && diff > delay) {
         int start = 0;
         onMarkerFoundHandler(start);
     }
+    
+    //======================== check for inactivity, shutdown
+    
+    curTime = ofGetElapsedTimeMillis();
+    diff    = curTime - currentTimeMillis;
+    
+    // if nothing is detected we lower down the delay, in case of glitch
+    delay = 60000*2;
+    
+    if( diff > delay) {
+        ofLogNotice("power off");
+        ofSystem("sudo poweroff");
+    }
+    
+    
     
 }
 
@@ -260,13 +275,14 @@ void ofApp::onMarkerFoundHandler(int & markerId) {
             
             ofLogNotice("Log scenario") << dataManager.scenarios[markerId].themeName << " " << dataManager.scenarios[markerId].cardName;
             logger.logScenario(markerId,dataManager.scenarios[markerId].themeName, dataManager.scenarios[markerId].cardName);
-            
+            currentTimeMillis       = ofGetElapsedTimeMillis();
+            currentShutDownMillis   = ofGetElapsedTimeMillis();
+
         }
         
         sceneManager.setScenario(&dataManager.scenarios[markerId]);
 
-    
-        currentTimeMillis  = ofGetElapsedTimeMillis();
+        
 
         // restart time
         

@@ -46,7 +46,7 @@ class ofApp : public ofBaseApp{
         ofPoint storedMousePosition;
         ofRectangle cropRectangle;
     
-        int currentTimeMillis;
+        int currentTimeMillis, currentShutDownMillis;
         Logger logger;
     
         // main config
