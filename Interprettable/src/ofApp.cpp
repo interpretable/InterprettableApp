@@ -253,7 +253,6 @@ void ofApp::onMarkerFoundHandler(int & markerId) {
     
     if( markerId == trackingManager.detector.getLowestScoreIndex()) {
                 
-        sceneManager.setScenario(&dataManager.scenarios[markerId]);
         
         ofLogNotice("Marker found.") << "Current id is " << sceneManager.currentScenarioID << " and catched id is " << dataManager.scenarios[markerId].id;
         if(sceneManager.currentScenarioID != dataManager.scenarios[markerId].id) {
@@ -263,6 +262,9 @@ void ofApp::onMarkerFoundHandler(int & markerId) {
             logger.logScenario(markerId,dataManager.scenarios[markerId].themeName, dataManager.scenarios[markerId].cardName);
             
         }
+        
+        sceneManager.setScenario(&dataManager.scenarios[markerId]);
+
     
         currentTimeMillis  = ofGetElapsedTimeMillis();
 
