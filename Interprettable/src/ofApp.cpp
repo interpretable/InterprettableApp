@@ -255,8 +255,11 @@ void ofApp::onMarkerFoundHandler(int & markerId) {
                 
         sceneManager.setScenario(&dataManager.scenarios[markerId]);
         
+        ofLogNotice("Marker found.") << "Current id is " << sceneManager.currentScenarioID << " and catched id is " << dataManager.scenarios[markerId].id;
         if(sceneManager.currentScenarioID != dataManager.scenarios[markerId].id) {
             
+            
+            ofLogNotice("Log scenario") << dataManager.scenarios[markerId].themeName << " " << dataManager.scenarios[markerId].cardName;
             logger.logScenario(markerId,dataManager.scenarios[markerId].themeName, dataManager.scenarios[markerId].cardName);
             
         }
