@@ -257,9 +257,9 @@ void ofApp::onMarkerFoundHandler(int & markerId) {
         logger.logScenario(markerId,dataManager.scenarios[markerId].themeName, dataManager.scenarios[markerId].cardName);
     
         // restart time
-        currentTimeMillis  = ofGetElapsedTimeMillis();
         
     }
+    currentTimeMillis  = ofGetElapsedTimeMillis();
 
 }
 
