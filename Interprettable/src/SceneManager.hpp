@@ -27,12 +27,13 @@ public:
     
     void onScenarioOutHandler();
     
+    int currentScenarioID;
+
 private:
     
     ofImage leftImage;
     ofxAnimatableFloat leftImagePos, rightImagePos;
     
-    int currentScenarioID;
     ScenarioData * currentScenario;
     ScenarioData * outScenario;
 

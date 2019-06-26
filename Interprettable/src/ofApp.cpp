@@ -254,12 +254,18 @@ void ofApp::onMarkerFoundHandler(int & markerId) {
     if( markerId == trackingManager.detector.getLowestScoreIndex()) {
                 
         sceneManager.setScenario(&dataManager.scenarios[markerId]);
-        logger.logScenario(markerId,dataManager.scenarios[markerId].themeName, dataManager.scenarios[markerId].cardName);
+        
+        if(sceneManager.currentScenarioID != dataManager.scenarios[markerId].id) {
+            
+            logger.logScenario(markerId,dataManager.scenarios[markerId].themeName, dataManager.scenarios[markerId].cardName);
+            
+        }
     
+        currentTimeMillis  = ofGetElapsedTimeMillis();
+
         // restart time
         
     }
-    currentTimeMillis  = ofGetElapsedTimeMillis();
 
 }
 
