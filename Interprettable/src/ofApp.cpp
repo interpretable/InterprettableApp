@@ -116,12 +116,11 @@ void ofApp::update(){
     
     cam.update();
     if(cam.isFrameNew()) {
-        ofPixels pixels = cam.getPixels();
         
         if(cropRectangle.width > 0 && cropRectangle.height > 0)
             pixels.crop(cropRectangle.x, cropRectangle.y, cropRectangle.width, cropRectangle.height);
         
-        trackingManager.update(pixels);
+        trackingManager.update(cam.getPixels());
         
     }
     
@@ -130,7 +129,7 @@ void ofApp::update(){
     int diff    = curTime - currentTimeMillis;
     
     // if nothings happends for 10mn, restart.
-    if( diff > 10000) {
+    if( diff > 600000) {
         int start = 0;
         onMarkerFoundHandler(start);
     }
@@ -155,21 +154,17 @@ void ofApp::draw(){
     ofDisableAlphaBlending();
     fbo.end();
     
-    ofMatrix4x4 mat = warper.getMatrix();
     
     //======================== use the matrix to transform our fbo.
     ofSetColor(255,255);
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     ofPushMatrix();
-    ofMultMatrix(mat);
+    ofMultMatrix(warper.getMatrix());
     fbo.draw(0, 0);
     ofPopMatrix();
     glDisable(GL_BLEND);
     
-    
-    
-
     
     if(bDebugWarpMode) {
         
@@ -246,7 +241,7 @@ void ofApp::onMarkerFoundHandler(int & markerId) {
     
     if( markerId == trackingManager.detector.getLowestScoreIndex()) {
         
-        ofLogNotice("Marker found !" ) << trackingManager.getLabel(markerId);
+       // ofLogNotice("Marker found !" ) << trackingManager.getLabel(markerId);//
         
         sceneManager.setScenario(&dataManager.scenarios[markerId]);
         logger.logScenario(markerId,dataManager.scenarios[markerId].theme);
@@ -267,8 +262,18 @@ void ofApp::onMarkerLostHandler(int & markerId) {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
-    if(key == 'd')
+    if(key == 'd') {
+        
         bDebugMode = !bDebugMode;
+        
+        if(bDebugMode) {
+            ofShowCursor();
+            
+        } else {
+            ofHideCursor();
+        }
+
+    }
     
     if(key == 'c')
         ofShowCursor();
@@ -278,9 +283,11 @@ void ofApp::keyPressed(int key){
         bDebugWarpMode =!bDebugWarpMode;
         
         if(bDebugWarpMode) {
+            ofShowCursor();
             warper.enableMouseControls();
             warper.enableKeyboardShortcuts();
         } else {
+            ofHideCursor();
             warper.disableMouseControls();
             warper.disableKeyboardShortcuts();
             warper.save();
