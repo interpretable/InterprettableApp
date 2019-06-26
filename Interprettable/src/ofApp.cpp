@@ -141,14 +141,19 @@ void ofApp::update(){
     int curTime = ofGetElapsedTimeMillis();
     int diff    = curTime - currentTimeMillis;
     
-    ofLogNotice("Time Elapsed") << diff;
+    //ofLogNotice("Time Elapsed") << diff;
 
     // if nothing is detected we lower down the delay, in case of glitch
     int delay = 60000;
     
     if(  trackingManager.getNumDetecteds() == 0 && diff > delay) {
+        
+        ofLogNotice("Time Elapsed, go back to Home") << diff;
+
         int start = 0;
         onMarkerFoundHandler(start);
+        currentTimeMillis       = ofGetElapsedTimeMillis();
+
     }
     
     //======================== check for inactivity, shutdown
@@ -156,14 +161,13 @@ void ofApp::update(){
     curTime = ofGetElapsedTimeMillis();
     diff    = curTime - currentShutDownMillis;
     
-    ofLogNotice("Time Elapsed sotdown") << diff;
 
     // if nothing is detected we lower down the delay, in case of glitch
     delay = 60000*2;
     
     if( diff > delay) {
         ofLogNotice("power off");
-        ofSystem("sudo poweroff");
+        ofSystem("poweroff");
     }
     
     
