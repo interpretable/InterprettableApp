@@ -47,6 +47,7 @@ class ofApp : public ofBaseApp{
         ofRectangle cropRectangle;
     
         int currentTimeMillis, currentShutDownMillis;
+        int welcomeIdleDelay, shutdownDelay;
         Logger logger;
     
         // main config

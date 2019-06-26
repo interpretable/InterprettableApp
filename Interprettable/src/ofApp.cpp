@@ -144,9 +144,8 @@ void ofApp::update(){
     //ofLogNotice("Time Elapsed") << diff;
 
     // if nothing is detected we lower down the delay, in case of glitch
-    int delay = 60000;
     
-    if(  trackingManager.getNumDetecteds() == 0 && diff > delay) {
+    if( diff > welcomeIdleDelay) {
         
         ofLogNotice("Time Elapsed, go back to Home") << diff;
 
@@ -161,13 +160,11 @@ void ofApp::update(){
     curTime = ofGetElapsedTimeMillis();
     diff    = curTime - currentShutDownMillis;
     
-
     // if nothing is detected we lower down the delay, in case of glitch
-    delay = 60000*2;
     
-    if( diff > delay) {
+    if( diff > shutdownDelay) {
         ofLogNotice("power off");
-        ofSystem("poweroff");
+        ofSystem("sh /home/interpretable/shutdown.sh");
     }
     
     
@@ -265,7 +262,8 @@ void ofApp::loadConfigJson() {
     cropRectangle.set( configJson["camera_crop"]["x"], configJson["camera_crop"]["y"], configJson["camera_crop"]["width"], configJson["camera_crop"]["height"]);
     trackingManager.setProps(configJson["features-tracking-ratio"], configJson["features-ntries"]);
     machineId = configJson.value("machine-id", 0);
-        
+    welcomeIdleDelay = configJson.value("welcome-delay", 600000);
+    shutdownDelay =  configJson.value("shutdown-delay", 3600000);
 }
 
 
@@ -284,19 +282,18 @@ void ofApp::onMarkerFoundHandler(int & markerId) {
             ofLogNotice("Log scenario") << dataManager.scenarios[markerId].themeName << " " << dataManager.scenarios[markerId].cardName;
             logger.logScenario(markerId,dataManager.scenarios[markerId].themeName, dataManager.scenarios[markerId].cardName);
             
-            if(markerId !=0 )
+            if(markerId !=0 ) {
                 currentTimeMillis       = ofGetElapsedTimeMillis();
+                ofLogNotice("Reset Timer delay") << welcomeIdleDelay;
+
+            }
             
             currentShutDownMillis   = ofGetElapsedTimeMillis();
 
         }
         
         sceneManager.setScenario(&dataManager.scenarios[markerId]);
-
-        
-
         // restart time
-        
     }
 
 }
