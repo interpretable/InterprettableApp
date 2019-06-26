@@ -142,7 +142,7 @@ void ofApp::update(){
     int diff    = curTime - currentTimeMillis;
     
     // if nothing is detected we lower down the delay, in case of glitch
-    int delay = ( trackingManager.getNumDetecteds() > 0 ) ? 600000 : 2000;
+    int delay = ( trackingManager.getNumDetecteds() > 0 ) ? 600000 : 60000;
     
     if( diff > delay) {
         int start = 0;
