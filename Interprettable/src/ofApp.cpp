@@ -96,28 +96,39 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
+#ifdef __linux__
+
+    // linux hack to get full screen
     if(ofGetFrameNum() == 5 ) {
         ofSetFullscreen(true);
     }
     
-    sceneManager.update();
+#endif
     
     
+    //======================== check for new config.json changes
     if(ofGetFrameNum() % 100 == 0) {
         
         // check for config changes
         int currentTimeStamp = std::filesystem::last_write_time(configJsonFile);
-        
         if(currentTimeStamp != configJsonTimeStamp) {
             loadConfigJson();
         }
         
     }
     
+    //======================== update scene
+    
+    sceneManager.update();
+
+    //======================== update camera & tracking
+
     cam.update();
     if(cam.isFrameNew()) {
+        
         ofPixels pixels = cam.getPixels();
         
+        // we use the cropped camera image
         if(cropRectangle.width > 0 && cropRectangle.height > 0)
             pixels.crop(cropRectangle.x, cropRectangle.y, cropRectangle.width, cropRectangle.height);
         
@@ -125,12 +136,15 @@ void ofApp::update(){
         
     }
     
-    // check for inactivity
+    //======================== check for inactivity, 10 mn
+    
     int curTime = ofGetElapsedTimeMillis();
     int diff    = curTime - currentTimeMillis;
     
-    // if nothings happends for 10mn, restart.
-    if( diff > 600000) {
+    // if nothing is detected we lower down the delay, in case of glitch
+    int delay = ( trackingManager.getNumDetecteds() > 0 ) ? 600000 : 2000;
+    
+    if( diff > delay) {
         int start = 0;
         onMarkerFoundHandler(start);
     }
@@ -140,13 +154,14 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-
-    
+    //======================== set canvas
     ofBackground(0);
     ofFill();
     ofSetColor(255);
     ofEnableAlphaBlending();
     
+    //======================== create frame buffer object of the drawn scene
+
     fbo.begin();
     ofEnableAlphaBlending();
     ofClear(0, 0, 0, 0);
@@ -155,22 +170,18 @@ void ofApp::draw(){
     ofDisableAlphaBlending();
     fbo.end();
     
-    ofMatrix4x4 mat = warper.getMatrix();
-    
-    //======================== use the matrix to transform our fbo.
+    //======================== use the matrix to transform our fbo, and warp
     ofSetColor(255,255);
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     ofPushMatrix();
-    ofMultMatrix(mat);
+    ofMultMatrix(warper.getMatrix());
     fbo.draw(0, 0);
     ofPopMatrix();
     glDisable(GL_BLEND);
     
-    
-    
+    //======================== draw warped configuration
 
-    
     if(bDebugWarpMode) {
         
         ofSetColor(ofColor::magenta);
@@ -187,6 +198,8 @@ void ofApp::draw(){
         ofSetColor(255,255);
         
     }
+    
+    //======================== draw camera
     
     if(bDebugMode) {
 
@@ -212,8 +225,6 @@ void ofApp::exit() {
     
     
 #ifdef __linux__
-    
-   
     cam.stop();
     cam.close();
     
@@ -223,7 +234,6 @@ void ofApp::exit() {
 
 //--------------------------------------------------------------
 
-
 void ofApp::loadConfigJson() {
     
     
@@ -231,11 +241,8 @@ void ofApp::loadConfigJson() {
     configJson = ofLoadJson("config.json");
     cropRectangle.set( configJson["camera_crop"]["x"], configJson["camera_crop"]["y"], configJson["camera_crop"]["width"], configJson["camera_crop"]["height"]);
     trackingManager.setProps(configJson["features-tracking-ratio"], configJson["features-ntries"]);
-    
     machineId = configJson.value("machine-id", 0);
-    
-   // trackingManager.detector.setExtractorSettings(60, 4);
-    
+        
 }
 
 
@@ -245,9 +252,7 @@ void ofApp::onMarkerFoundHandler(int & markerId) {
     
     
     if( markerId == trackingManager.detector.getLowestScoreIndex()) {
-        
-        //ofLogNotice("Marker found !" ) << trackingManager.getLabel(markerId);
-        
+                
         sceneManager.setScenario(&dataManager.scenarios[markerId]);
         logger.logScenario(markerId,dataManager.scenarios[markerId].theme);
     

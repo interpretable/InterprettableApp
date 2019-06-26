@@ -20,8 +20,8 @@ public:
     void start();
     void update(ofPixels & input);
     
+    int getNumDetecteds();
     string getLabel(int index);
-    
     void debugDraw(float x, float y);
     
     ofEvent<int> onMarkerFound;

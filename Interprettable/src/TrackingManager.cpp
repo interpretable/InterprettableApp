@@ -47,8 +47,6 @@ void TrackingManager::start() {
     
 }
 
-
-
 void TrackingManager::update(ofPixels & input) {
     
     detector.update(input);
@@ -77,6 +75,20 @@ string TrackingManager::getLabel(int index) {
     return detector.labels[index];
     
 }
+
+int TrackingManager::getNumDetecteds() {
+    
+    int result = 0;
+    for(int i=0; i<images.size(); i++) {
+        
+        bool bIsDetected = detector.getDetected(i);
+        if(bIsDetected)
+            result ++;
+    }
+    
+    return result;
+}
+
 
 void TrackingManager::setProps(float distanceRatio, int nTries) {
     
