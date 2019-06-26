@@ -116,11 +116,12 @@ void ofApp::update(){
     
     cam.update();
     if(cam.isFrameNew()) {
+        ofPixels pixels = cam.getPixels();
         
         if(cropRectangle.width > 0 && cropRectangle.height > 0)
-            cam.getPixels().crop(cropRectangle.x, cropRectangle.y, cropRectangle.width, cropRectangle.height);
+            pixels.crop(cropRectangle.x, cropRectangle.y, cropRectangle.width, cropRectangle.height);
         
-        trackingManager.update(cam.getPixels());
+        trackingManager.update(pixels);
         
     }
     
@@ -154,17 +155,21 @@ void ofApp::draw(){
     ofDisableAlphaBlending();
     fbo.end();
     
+    ofMatrix4x4 mat = warper.getMatrix();
     
     //======================== use the matrix to transform our fbo.
     ofSetColor(255,255);
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     ofPushMatrix();
-    ofMultMatrix(warper.getMatrix());
+    ofMultMatrix(mat);
     fbo.draw(0, 0);
     ofPopMatrix();
     glDisable(GL_BLEND);
     
+    
+    
+
     
     if(bDebugWarpMode) {
         
@@ -241,7 +246,7 @@ void ofApp::onMarkerFoundHandler(int & markerId) {
     
     if( markerId == trackingManager.detector.getLowestScoreIndex()) {
         
-       // ofLogNotice("Marker found !" ) << trackingManager.getLabel(markerId);//
+        //ofLogNotice("Marker found !" ) << trackingManager.getLabel(markerId);
         
         sceneManager.setScenario(&dataManager.scenarios[markerId]);
         logger.logScenario(markerId,dataManager.scenarios[markerId].theme);
@@ -262,18 +267,8 @@ void ofApp::onMarkerLostHandler(int & markerId) {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
-    if(key == 'd') {
-        
+    if(key == 'd')
         bDebugMode = !bDebugMode;
-        
-        if(bDebugMode) {
-            ofShowCursor();
-            
-        } else {
-            ofHideCursor();
-        }
-
-    }
     
     if(key == 'c')
         ofShowCursor();
