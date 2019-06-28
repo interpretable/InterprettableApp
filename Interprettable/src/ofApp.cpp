@@ -7,6 +7,7 @@ void ofApp::setup(){
 
     bDebugMode      = false;
     bDebugWarpMode  = false;
+    bIsInactive     = false;
     
     ofSetFrameRate(60);
     ofSetLogLevel(OF_LOG_NOTICE);
@@ -136,6 +137,7 @@ void ofApp::update(){
         
     }
     
+    
     //======================== check for inactivity, 10 mn
     
     int curTime = ofGetElapsedTimeMillis();
@@ -147,12 +149,13 @@ void ofApp::update(){
     
     if( diff > welcomeIdleDelay) {
         
-        ofLogNotice("Time Elapsed, go back to Home") << diff;
-
+        
         int markerId = 0;
         
         if(sceneManager.currentScenarioID != dataManager.scenarios[markerId].id) {
             
+            ofLogNotice("Time Elapsed, go back to Home") << diff;
+
             logger.logScenario(markerId,dataManager.scenarios[markerId].themeName, dataManager.scenarios[markerId].cardName);
             
             if(markerId !=0 ) {
@@ -165,7 +168,9 @@ void ofApp::update(){
             
         }
         
+        inactiveLastRecordedId = sceneManager.currentScenarioID;
         sceneManager.setScenario(&dataManager.scenarios[markerId]);
+        bIsInactive = true;
 
     }
     
@@ -176,7 +181,7 @@ void ofApp::update(){
     
     // if nothing is detected we lower down the delay, in case of glitch
     
-    if( diff > shutdownDelay) {
+    if( bIsInactive && diff > shutdownDelay) {
         ofLogNotice("power off");
         ofSystem("sudo poweroff");
     }
@@ -286,9 +291,14 @@ void ofApp::loadConfigJson() {
 
 void ofApp::onMarkerFoundHandler(int & markerId) {
     
+    if( bIsInactive && markerId == inactiveLastRecordedId) {
+        ofLogNotice("Marker found.") << "but we're already inactive with this same id..";
+        return;
+    }
     
     if( markerId == trackingManager.detector.getLowestScoreIndex()) {
-                
+        
+        
         
         ofLogNotice("Marker found.") << "Current id is " << sceneManager.currentScenarioID << " and catched id is " << dataManager.scenarios[markerId].id;
         if(sceneManager.currentScenarioID != dataManager.scenarios[markerId].id) {
@@ -309,6 +319,8 @@ void ofApp::onMarkerFoundHandler(int & markerId) {
         
         sceneManager.setScenario(&dataManager.scenarios[markerId]);
         // restart time
+        
+        bIsInactive = false;
     }
 
 }

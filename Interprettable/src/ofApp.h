@@ -48,6 +48,8 @@ class ofApp : public ofBaseApp{
     
         int currentTimeMillis, currentShutDownMillis;
         int welcomeIdleDelay, shutdownDelay;
+        bool bIsInactive;
+        int inactiveLastRecordedId;
         Logger logger;
     
         // main config
