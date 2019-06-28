@@ -38,7 +38,6 @@ void Logger::log(string name) {
 
 
 void Logger::log(string name, vector<string> args) {
-    
 
     logJson[name]["time"] = getTime();
     ofSaveJson(jsonName, logJson);

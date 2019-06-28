@@ -164,7 +164,7 @@ void ofApp::update(){
     
     if( diff > shutdownDelay) {
         ofLogNotice("power off");
-        ofSystem("sh /home/interpretable/shutdown.sh");
+        ofSystem("poweroff");
     }
     
     
@@ -258,12 +258,13 @@ void ofApp::loadConfigJson() {
     
     
     configJsonTimeStamp = std::filesystem::last_write_time(configJsonFile);
-    configJson = ofLoadJson("config.json");
+    configJson          = ofLoadJson("config.json");
     cropRectangle.set( configJson["camera_crop"]["x"], configJson["camera_crop"]["y"], configJson["camera_crop"]["width"], configJson["camera_crop"]["height"]);
     trackingManager.setProps(configJson["features-tracking-ratio"], configJson["features-ntries"]);
-    machineId = configJson.value("machine-id", 0);
-    welcomeIdleDelay = configJson.value("welcome-delay", 600000);
-    shutdownDelay =  configJson.value("shutdown-delay", 3600000);
+    machineId           = configJson.value("machine-id", 0);
+    welcomeIdleDelay    = configJson.value("welcome-delay", 600000);
+    shutdownDelay       =  configJson.value("shutdown-delay", 3600000);
+    
 }
 
 
