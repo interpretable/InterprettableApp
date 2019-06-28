@@ -178,7 +178,7 @@ void ofApp::update(){
     
     if( diff > shutdownDelay) {
         ofLogNotice("power off");
-        ofSystem("poweroff");
+        ofSystem("sudo poweroff");
     }
     
     
