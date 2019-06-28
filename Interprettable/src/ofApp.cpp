@@ -171,6 +171,8 @@ void ofApp::update(){
         inactiveLastRecordedId = sceneManager.currentScenarioID;
         sceneManager.setScenario(&dataManager.scenarios[markerId]);
         bIsInactive = true;
+        ofLogNotice("Setting bIsInactive") << bIsInactive;
+
 
     }
     
@@ -290,6 +292,9 @@ void ofApp::loadConfigJson() {
 //--------------------------------------------------------------
 
 void ofApp::onMarkerFoundHandler(int & markerId) {
+    
+    ofLogNotice("Marker found.") << "bIsInactive is " << bIsInactive << " and inactiveLastRecordedId is " << inactiveLastRecordedId ;
+
     
     if( bIsInactive && markerId == inactiveLastRecordedId) {
         ofLogNotice("Marker found.") << "but we're already inactive with this same id..";
