@@ -149,9 +149,23 @@ void ofApp::update(){
         
         ofLogNotice("Time Elapsed, go back to Home") << diff;
 
-        int start = 0;
-        onMarkerFoundHandler(start);
-        currentTimeMillis       = ofGetElapsedTimeMillis();
+        int markerId = 0;
+        
+        if(sceneManager.currentScenarioID != dataManager.scenarios[markerId].id) {
+            
+            logger.logScenario(markerId,dataManager.scenarios[markerId].themeName, dataManager.scenarios[markerId].cardName);
+            
+            if(markerId !=0 ) {
+                currentTimeMillis       = ofGetElapsedTimeMillis();
+                ofLogNotice("Reset Timer delay") << welcomeIdleDelay;
+                
+            }
+            
+            currentShutDownMillis   = ofGetElapsedTimeMillis();
+            
+        }
+        
+        sceneManager.setScenario(&dataManager.scenarios[markerId]);
 
     }
     
