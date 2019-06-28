@@ -152,26 +152,29 @@ void ofApp::update(){
         
         int markerId = 0;
         
-        if(sceneManager.currentScenarioID != dataManager.scenarios[markerId].id) {
+        if(sceneManager.currentScenarioID != 0) {
+            
             
             ofLogNotice("Time Elapsed, go back to Home") << diff;
-
-            logger.logScenario(markerId,dataManager.scenarios[markerId].themeName, dataManager.scenarios[markerId].cardName);
             
-            if(markerId !=0 ) {
-                currentTimeMillis       = ofGetElapsedTimeMillis();
-                ofLogNotice("Reset Timer delay") << welcomeIdleDelay;
-                
-            }
+            
+            inactiveLastRecordedId = sceneManager.currentScenarioID;
+            ofLogNotice("Setting inactiveLastRecordedId") << inactiveLastRecordedId;
+
+            logger.logScenario(markerId,dataManager.scenarios[0].themeName, dataManager.scenarios[0].cardName);
+            
+            
             
             currentShutDownMillis   = ofGetElapsedTimeMillis();
+            sceneManager.setScenario(&dataManager.scenarios[0]);
+            bIsInactive = true;
+            ofLogNotice("Setting bIsInactive") << bIsInactive;
+            currentTimeMillis       = ofGetElapsedTimeMillis();
+
             
         }
         
-        inactiveLastRecordedId = sceneManager.currentScenarioID;
-        sceneManager.setScenario(&dataManager.scenarios[markerId]);
-        bIsInactive = true;
-        ofLogNotice("Setting bIsInactive") << bIsInactive;
+       
 
 
     }
