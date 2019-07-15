@@ -35,7 +35,6 @@ void ofApp::setup(){
     cam.setDeviceID(0);
     cam.setup(configJson["webcam-width"],configJson["webcam-height"]);
     
-    
 #endif
 
     ofLogNotice("Setting tracking manager");
@@ -89,8 +88,6 @@ void ofApp::setup(){
     logger.log("start");
 
     ofLogNotice("Setting up done");
-
-
     
 }
 
@@ -154,29 +151,16 @@ void ofApp::update(){
         
         if(sceneManager.currentScenarioID != 0) {
             
-            
-            ofLogNotice("Time Elapsed, go back to Home") << diff;
-            
-            
             inactiveLastRecordedId = sceneManager.currentScenarioID;
-            ofLogNotice("Setting inactiveLastRecordedId") << inactiveLastRecordedId;
-
             logger.logScenario(markerId,dataManager.scenarios[0].themeName, dataManager.scenarios[0].cardName);
-            
-            
             
             currentShutDownMillis   = ofGetElapsedTimeMillis();
             sceneManager.setScenario(&dataManager.scenarios[0]);
             bIsInactive = true;
-            ofLogNotice("Setting bIsInactive") << bIsInactive;
             currentTimeMillis       = ofGetElapsedTimeMillis();
-
             
         }
         
-       
-
-
     }
     
     //======================== check for inactivity, shutdown
@@ -187,7 +171,6 @@ void ofApp::update(){
     // if nothing is detected we lower down the delay, in case of glitch
     
     if( bIsInactive && diff > shutdownDelay) {
-        ofLogNotice("power off");
         ofSystem("sudo poweroff");
     }
     

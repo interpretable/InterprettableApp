@@ -178,7 +178,6 @@
 		EB4F14C4AE3B3EFD04520383 /* DirectoryWatcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12A42DF3BFDE28A4818C2EC4 /* DirectoryWatcher.cpp */; };
 		EB7331D6D89E5B302063D8A2 /* ScenarioData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 24A567D38B4BBA568A86932D /* ScenarioData.cpp */; };
 		EBCDE831EFAE08274E799C97 /* Calibration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 402C8F4015542356D362AC88 /* Calibration.cpp */; };
-		F1DFCA185CB8B9303864D980 /* ofApp.cpp.autosave in Sources */ = {isa = PBXBuildFile; fileRef = B03060B2BDC0219AB7B04C14 /* ofApp.cpp.autosave */; };
 		F76B4A79BD8DE4854141CB47 /* fdog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2D8249D46647E3C51769CDE /* fdog.cpp */; };
 		F953E11952BFF8C207418550 /* HexBinaryEncoding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22565CAF8FFEF25C805A438F /* HexBinaryEncoding.cpp */; };
 		FB09C6B2A1DA0EA217240CB8 /* ofxCvGrayscaleImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 057122A817D12571F8C0C7A4 /* ofxCvGrayscaleImage.cpp */; };
@@ -779,7 +778,6 @@
 		AFB896F95E9D7C2A1AF48C9F /* shape_distance.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = shape_distance.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/shape/shape_distance.hpp; sourceTree = SOURCE_ROOT; };
 		AFCFB2EC5C6F97073DAC843C /* ocl.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ocl.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/ocl.hpp; sourceTree = SOURCE_ROOT; };
 		AFDF50FE842FFA83D825748D /* matx.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = matx.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/matx.hpp; sourceTree = SOURCE_ROOT; };
-		B03060B2BDC0219AB7B04C14 /* ofApp.cpp.autosave */ = {isa = PBXFileReference; explicitFileType = file; fileEncoding = 30; name = ofApp.cpp.autosave; path = src/ofApp.cpp.autosave; sourceTree = SOURCE_ROOT; };
 		B047FF96258DC01792B272DB /* ETF.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ETF.cpp; path = ../../../addons/ofxCv/libs/CLD/src/ETF.cpp; sourceTree = SOURCE_ROOT; };
 		B0846E2205B7BE8B7FB5E58E /* map.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = map.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/reg/map.hpp; sourceTree = SOURCE_ROOT; };
 		B09FCFF976DCEACB7C7C8D4E /* optical_flow.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = optical_flow.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/superres/optical_flow.hpp; sourceTree = SOURCE_ROOT; };
@@ -3261,13 +3259,12 @@
 				83929E5F90BCDD1254F12E70 /* DataManager.cpp */,
 				FA1B8DE9E7D49C21B5DBACC9 /* WelcomePage.cpp */,
 				8EC1E3B4577157D11AE705FC /* TrackingManager.hpp */,
+				2A52A90920A024262323E7B1 /* TrackingManager.cpp */,
 				89EC5FF43E15F49964A9FCBE /* ScenarioData.hpp */,
 				24A567D38B4BBA568A86932D /* ScenarioData.cpp */,
 				6FFD838699537542FFEF8CCC /* SceneManager.hpp */,
-				B03060B2BDC0219AB7B04C14 /* ofApp.cpp.autosave */,
 				4D7DD47F12197247CB52182C /* DataManager.hpp */,
 				DCD2FE4519A6BE8B26C761DB /* WelcomePage.hpp */,
-				2A52A90920A024262323E7B1 /* TrackingManager.cpp */,
 				22EDA5A62C642C37311C4384 /* SceneManager.cpp */,
 				A839590BA16E3014E8808C60 /* RoundedRectImage.hpp */,
 			);
@@ -3490,7 +3487,6 @@
 				30F90349BCFA52122369094D /* RoundedRectImage.cpp in Sources */,
 				BB0EB03D7106254409905306 /* DataManager.cpp in Sources */,
 				B9056910A6205B1023538F43 /* WelcomePage.cpp in Sources */,
-				F1DFCA185CB8B9303864D980 /* ofApp.cpp.autosave in Sources */,
 				B0E7FECFE9B973082F2EC0F8 /* TrackingManager.cpp in Sources */,
 				EB7331D6D89E5B302063D8A2 /* ScenarioData.cpp in Sources */,
 				AC29B7A7FEDB0A378D08F41D /* SceneManager.cpp in Sources */,

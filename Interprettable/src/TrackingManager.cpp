@@ -10,24 +10,6 @@
 void TrackingManager::setup() {
     
     detector.setup();
-    
-    /*
-    string path = "markers";
-    ofDirectory dir(path);
-    dir.allowExt("jpg");
-    dir.listDir();
-    
-    //go through and print out all the paths
-    for(int i = 0; i < dir.size(); i++){
-        
-        ofImage img;
-        img.load(dir.getPath(i));
-        detector.addImageToTrack(img, dir.getFile(i).getFileName());
-        images.push_back(img);
-        detecteds.push_back(false);
-    }
-    
-     */
 
 }
 
