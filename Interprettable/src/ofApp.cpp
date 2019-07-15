@@ -14,6 +14,9 @@ void ofApp::setup(){
     ofSetEscapeQuitsApp(true);
     ofHideCursor();
     
+    trackingManager.setup();
+
+    
     configJsonFile.open("config.json");
     loadConfigJson();
     
@@ -39,7 +42,6 @@ void ofApp::setup(){
 
     ofLogNotice("Setting tracking manager");
 
-    trackingManager.setup();
     
     // add pictures
     for(int i=0; i<dataManager.mainJson.size(); i++) {
@@ -279,7 +281,7 @@ void ofApp::loadConfigJson() {
 
 void ofApp::onMarkerFoundHandler(int & markerId) {
     
-    ofLogNotice("Marker found.") << "bIsInactive is " << bIsInactive << " and inactiveLastRecordedId is " << inactiveLastRecordedId ;
+    //ofLogNotice("Marker found.") << "bIsInactive is " << bIsInactive << " and inactiveLastRecordedId is " << inactiveLastRecordedId ;
 
     
     if( bIsInactive && markerId == inactiveLastRecordedId) {
@@ -289,18 +291,16 @@ void ofApp::onMarkerFoundHandler(int & markerId) {
     
     if( markerId == trackingManager.detector.getLowestScoreIndex()) {
         
-        
-        
         ofLogNotice("Marker found.") << "Current id is " << sceneManager.currentScenarioID << " and catched id is " << dataManager.scenarios[markerId].id;
         if(sceneManager.currentScenarioID != dataManager.scenarios[markerId].id) {
             
             
-            ofLogNotice("Log scenario") << dataManager.scenarios[markerId].themeName << " " << dataManager.scenarios[markerId].cardName;
+            //ofLogNotice("Log scenario") << dataManager.scenarios[markerId].themeName << " " << dataManager.scenarios[markerId].cardName;
             logger.logScenario(markerId,dataManager.scenarios[markerId].themeName, dataManager.scenarios[markerId].cardName);
             
             if(markerId !=0 ) {
                 currentTimeMillis       = ofGetElapsedTimeMillis();
-                ofLogNotice("Reset Timer delay") << welcomeIdleDelay;
+                //ofLogNotice("Reset Timer delay") << welcomeIdleDelay;
 
             }
             
@@ -325,8 +325,17 @@ void ofApp::onMarkerLostHandler(int & markerId) {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
-    if(key == 'd')
+    if(key == 'd') {
+        
         bDebugMode = !bDebugMode;
+    
+        if(bDebugWarpMode) {
+          ofShowCursor();
+        } else {
+          ofHideCursor();
+        }
+        
+    }
     
     if(key == 'c')
         ofShowCursor();

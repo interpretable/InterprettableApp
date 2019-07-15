@@ -83,15 +83,24 @@ void TrackingManager::setProps(float distanceRatio, int nTries) {
 void TrackingManager::debugDraw(float x, float y) {
     
     int lowest = detector.getLowestScoreIndex();
+    
+    ofSetColor(255);
+    detector.camGrayImg.draw(0.0,600);
 
     ofPushMatrix();
     ofTranslate(x, y);
     
     for(int i=0; i<images.size(); i++) {
         
+            ofDrawBitmapStringHighlight(detector.labels[i] + " " + ofToString(detector.detectedsDistanceResult[i]) + "(" + ofToString(detector.detectedsScore[i]) + ")", 0, i * 20, ofColor(255,0,0), ofColor(255));
+        
+    }
+    
+    for(int i=0; i<images.size(); i++) {
+        
         bool bIsDetected = detector.getDetected(i);
         if(bIsDetected && i == lowest) {
-            ofDrawBitmapStringHighlight(detector.labels[i], 0, i * 20);
+            ofDrawBitmapStringHighlight(detector.labels[i] + " " +  ofToString(detector.detectedsDistanceResult[i])+ "(" + ofToString(detector.detectedsScore[i]) + ")", 0, i * 20);
         }
 
     }
