@@ -1,6 +1,6 @@
 # ⛔️ DEPRECATED
 
-[__Interpretable__](https://github.com/interpretable/interpretable) is now web app based on [__Cboard__ API](https://github.com/cboard-org/cboard).
+[__Interpretable__](https://github.com/interpretable/interpretable) is now web app based on [__Cboard__](https://github.com/cboard-org/cboard).
 
 # Interprettable OF App
 
